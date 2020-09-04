@@ -3,7 +3,7 @@
 @section('register')
 
 <div class="container" id="container">
-    <h1>Test Changes</h1>
+    <h1>Test Changes ankit new</h1>
     <div class="form-container sign-in-container">
         <form action="#" autocomplete="off" id="register_form">
             <h1 class="my-2">Create Account</h1>
