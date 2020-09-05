@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Company_registration extends Model
 {
     protected $fillable = [
-
         'company_name',
         'tagline',
         'website_url',

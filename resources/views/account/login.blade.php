@@ -27,7 +27,7 @@
     <div class="overlay-container d-none d-md-block">
         <div class="overlay">
             <div class="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
+                <h1>{{$notice}}</h1>
                 {{-- <p>Enter your personal details and start journey with us</p> --}}
                      <a class="ghost btn" id="signUp" href="{{url('/')}}">Sign Up</a>
                 </div>

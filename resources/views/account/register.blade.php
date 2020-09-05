@@ -5,7 +5,8 @@
 <div class="container" id="container">
     <h1>Test Changes ankit new</h1>
     <div class="form-container sign-in-container">
-        <form action="#" autocomplete="off" id="register_form">
+        <form action="/api/company" method="post" autocomplete="off" id="register_form">
+            @csrf
             <h1 class="my-2">Create Account</h1>
             {{-- <div class="social-container">
                 <a href="#" class="social"><i class="fa fa-facebook"></i></a>
@@ -38,7 +39,7 @@
                 <input type="number" autocomplete="off" class="required" placeholder="Pincode" name="pin_code" />
                 <div class="d-flex justify-content-between w-100">
                     <button form-back-step="2" class="back-btn my-3 float-left step-2-back-btn back-btn" id="signIn">Back</button>
-                    <button form-next-step="2" type="submit"  class="my-3 float-right next-btn step-2-next-btn">Next</button>
+                    <button form-next-step="2"  class="my-3 float-right next-btn step-2-next-btn">Next</button>
                 </div>
             </div>
             {{-- End Step 2 Code --}}
@@ -54,7 +55,7 @@
                 <input type="url" autocomplete="off" placeholder="Twitter Url" name="twitter_url" class="url" />
 
                 <button form-back-step="3" class="back-btn my-3 float-left step-3-back-btn back-btn" id="signIn">Back</button>
-                <button form-next-step="3" type="submit" class="my-3 float-right next-btn step-3-next-btn">Next</button>
+                <button form-next-step="3" class="my-3 float-right next-btn step-3-next-btn">Next</button>
             </div>
              {{-- End Step 3 Code --}}
 
@@ -65,6 +66,8 @@
                     <option selected desabled value="category">Category</option>
                     <option value="Educations">Educations</option>
                 </select>
+
+                <input type="text" name="erp_url" value="testing_static_erp_url" class="">
 
                 <button form-back-step="4" class="back-btn my-3 float-left step-4-back-btn back-btn" id="signIn">Back</button>
                 <button  type="submit" class="my-3 float-right submit-btn">Submit</button>
