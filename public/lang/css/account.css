@@ -53,6 +53,20 @@ a {
     /* z-index: -1; */
 }
 
+#register_form input{
+    text-transform: lowercase;
+}
+
+.congrs-text{
+    color: #feb648;
+    letter-spacing: 6px;
+}
+
+.txt-light{
+    color: #fee4cb;
+    font-weight: 500;
+}
+
 button {
 	border-radius: 20px;
 	border: 1px solid #FF4B2B;

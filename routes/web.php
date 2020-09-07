@@ -24,3 +24,12 @@ Route::get('/', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
+
+Route::get('/testing', function () {
+    return view('congratulations');
+});
+
+
+// Route::get('/api/company', function () {
+//     return view('congratulations');
+// });
