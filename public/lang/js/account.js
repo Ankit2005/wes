@@ -6,7 +6,6 @@ $(document).ready(function () {
             empty_field_validation("step-1", "step-2");
         });
 
-
         $(".step-2-next-btn").click(function (e) {
             e.preventDefault();
             empty_field_validation("step-2", "step-3");
@@ -15,10 +14,8 @@ $(document).ready(function () {
         $(".step-3-next-btn").click(function (e) {
             e.preventDefault();
             empty_field_validation("step-3", "step-4");
-
         });
     });
-
 
     // validate on next click
     function empty_field_validation(first_class, second_class) {
@@ -53,7 +50,6 @@ $(document).ready(function () {
 
         // slide if all required field is not empty
         if (tmp.length == input.length && $(".required-notice").length == 0) {
-
             company_valudition(first_class, second_class);
         }
 
@@ -115,8 +111,6 @@ $(document).ready(function () {
         const cmp_name = $(".cmp-name").val().trim();
         $(".erp-url").val(window.location+cmp_name.replace(/ /g,""));
 
-
-
         $.ajax({
             type: "get",
             url: "/api/company/" + cmp_name,
@@ -138,20 +132,40 @@ $(document).ready(function () {
                     cmp_name_input.nextSibling.remove();
                 }
 
+
+
+
+                $(".password").val(password_generator());
+
+
                 $("." + first_class).addClass("d-none");
                 $("." + second_class).removeClass("d-none");
                 $("." + second_class).addClass("animate__animated animate__slideInRight");
             }
         });
 
-
+        // $("." + first_class).addClass("d-none");
+        // $("." + second_class).removeClass("d-none");
+        // $("." + second_class).addClass("animate__animated animate__slideInRight");
     }
 
 
+    // password generator
 
+    function password_generator(){
+        charset = "abcEFGHqr>?stOPQRuvwxyz)_+|~-={}AijpnoZ012^&*3456]IJBm789!@#$%([KLdefghMNSTUVWXY:;,CDkl./";
+        var pass = ' ';
+        for (let index = 0; index < 8; index++) {
+            var j = Math.floor(Math.random()*charset.length-1);
+            pass += charset[j];
+        }
+
+        return pass;
+
+    }
 
     // slide on back
-    $(document).ready(function () {
+
         $(".step-2-back-btn").click(function (e) {
             e.preventDefault();
 
@@ -172,29 +186,21 @@ $(document).ready(function () {
             $(".step-4").addClass("d-none");
             $(".step-3").removeClass("d-none");
         });
-    });
-
-
-
-
 
 
     var testForm = document.getElementById('register_form');
-    testForm.onsubmit = function(event) {
-      event.preventDefault();
+    // testForm.onsubmit = function(event) {
+    //   event.preventDefault();
 
-      var request = new XMLHttpRequest();
-      // POST to httpbin which returns the POST data as JSON
-      request.open('POST', 'https://httpbin.org/post', /* async = */ false);
+    //   var request = new XMLHttpRequest();
+    //   // POST to httpbin which returns the POST data as JSON
+    //   request.open('POST', 'https://httpbin.org/post', /* async = */ false);
 
-      var formData = new FormData(document.getElementById('register_form'));
-      request.send(formData);
+    //   var formData = new FormData(document.getElementById('register_form'));
+    //   request.send(formData);
 
-      console.log("test form response");
-      console.log(request.response);
+    //   console.log("test form response");
+    //   console.log(request.response);
 
-    }
-
-
-
+    // }
 });

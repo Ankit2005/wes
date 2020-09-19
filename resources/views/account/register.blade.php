@@ -19,6 +19,8 @@
                 <div class="step-1 needs-validation">
                     <input type="text" autocomplete="off" class="required cmp-name" maxlength="80" placeholder="Company Name" name="company_name" />
                     <input type="url" name="erp_url"  class="erp-url d-none">
+                    <input type="password" name="password"  class="password d-none">
+
                     <input type="text" autocomplete="off" placeholder="Tagline" name="tagline"maxlength="100" />
                     <input type="website" autocomplete="off" placeholder="Website" name="website_url" maxlength="100" class="url" />
                     <input type="email" autocomplete="off" class="required" placeholder="Email Id" name="company_email" maxlength="80" />
@@ -39,7 +41,7 @@
                 <input type="text" autocomplete="off" class="required" placeholder="Counry" name="country" maxlength="45" />
                 <input type="number" autocomplete="off" class="required" placeholder="Pincode" name="pin_code" />
                 <div class="d-flex justify-content-between w-100">
-                    <button form-back-step="2" class="back-btn my-3 float-left step-2-back-btn back-btn" id="signIn">Back</button>
+                    <button form-back-step="2" class="back-btn my-3 float-left step-2-back-btn back-btn" >Back</button>
                     <button form-next-step="2"  class="my-3 float-right next-btn step-2-next-btn">Next</button>
                 </div>
             </div>
@@ -55,7 +57,7 @@
                 <input type="url" autocomplete="off" placeholder="Facebook Url" name="facebook_url" class="url" maxlength="95" />
                 <input type="url" autocomplete="off" placeholder="Twitter Url" name="twitter_url" class="url" maxlength="95" />
 
-                <button form-back-step="3" class="back-btn my-3 float-left step-3-back-btn back-btn" id="signIn">Back</button>
+                <button form-back-step="3" class="back-btn my-3 float-left step-3-back-btn back-btn" >Back</button>
                 <button form-next-step="3" class="my-3 float-right next-btn step-3-next-btn">Next</button>
             </div>
              {{-- End Step 3 Code --}}
@@ -68,9 +70,7 @@
                     <option value="Educations">Educations</option>
                 </select>
 
-
-
-                <button form-back-step="4" class="back-btn my-3 float-left step-4-back-btn back-btn" id="signIn">Back</button>
+                <button form-back-step="4" class="back-btn my-3 float-left step-4-back-btn back-btn" >Back</button>
                 <button  type="submit" class="my-3 float-right submit-btn">Submit</button>
             </div>
             {{-- End Step 4 Code --}}
