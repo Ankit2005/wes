@@ -128,6 +128,7 @@ $(document).ready(function () {
                 $("<span class='text-danger required-notice float-left mx-1'><i class='fa fa-warning'></i> This Name Is Allready Exitce </span>").insertAfter(cmp_name_input);
             },
             error: function (response) {
+
                 if (cmp_name_input.nextSibling.nodeName == "SPAN") {
                     cmp_name_input.nextSibling.remove();
                 }

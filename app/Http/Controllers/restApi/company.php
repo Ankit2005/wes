@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Company_registration;
 use App\Mail\sendEmail;
+use Illuminate\Support\Facades\Storage;
 
 
 class company extends Controller
@@ -41,38 +42,34 @@ class company extends Controller
     public $email;
     public $erp_url;
     public $pass;
+    public $file_data;
+    public $file_name;
 
     public function store(Request $request)
     {
-        // echo 'testing';
-        // print_r($request->all());
         $this->data = $request->all();
+        $this->file_data = $request->file('cmp_logo');
+        // $this->file_name = $this->file_data->getClientOriginalName();
+        $this->file_name = $this->data['company_name'].'_logo.png';
+        $this->file_data->storeAs('public', $this->file_name);
+        // print_r($this->file_data);
 
-        
         $this->email = $this->data['company_email'];
         $this->erp_url = $this->data['erp_url'];
         $this->pass = $this->data['password'];
-        
 
         \Mail::to($this->email)->send(new sendEmail(
-            array(   
-                'subject' => "your emal and password is now ready",       
+            array(
+                'subject' => "your emal and password is now ready",
                 'erp_url' => $this->erp_url,
                 'pass' => $this->pass
             )
         ));
 
-
-
         $this->encrypt_pass = array('password' => bcrypt($this->data['password']));
         $this->data = array_replace($this->data, $this->encrypt_pass);
 
-        
-        
-
-
-        
-        Company_registration::create( $this->data);
+        Company_registration::create($this->data);
          return  response()->view('congratulations',array("notice"=>"We Have Send Your Url And Password To Your Email !"))->header("Content-Type","text/html")->setStatusCode(201);
     }
 
@@ -101,7 +98,7 @@ class company extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

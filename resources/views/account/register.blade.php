@@ -5,7 +5,8 @@
 <div class="container" id="container">
     <h1>Test Changes ankit new</h1>
     <div class="form-container sign-in-container">
-        <form action="/api/company" method="post" autocomplete="off" id="register_form">
+
+        <form  action="/api/company" method="post" autocomplete="off" enctype="multipart/form-data" id="register_form">
             @csrf
             <h1 class="my-2">Create Account</h1>
             {{-- <div class="social-container">
@@ -20,6 +21,7 @@
                     <input type="text" autocomplete="off" class="required cmp-name" maxlength="80" placeholder="Company Name" name="company_name" />
                     <input type="url" name="erp_url"  class="erp-url d-none">
                     <input type="password" name="password"  class="password d-none">
+                    <input type="file" accept="image/*" name="cmp_logo">
 
                     <input type="text" autocomplete="off" placeholder="Tagline" name="tagline"maxlength="100" />
                     <input type="website" autocomplete="off" placeholder="Website" name="website_url" maxlength="100" class="url" />
@@ -29,8 +31,7 @@
 
                     <button form-next-step="1" type="submit" class="my-3 float-right next-btn step-1-next-btn">Next</button>
                 </div>
-            {{-- End Step 1 Code --}}
-
+             {{-- End Step 1 Code --}}
 
              {{-- Start Step 2 Code --}}
              <div class="step-2 d-none">
@@ -46,7 +47,6 @@
                 </div>
             </div>
             {{-- End Step 2 Code --}}
-
 
             {{-- Start Step 3 Code --}}
             <div class="step-3 d-none">
@@ -71,7 +71,7 @@
                 </select>
 
                 <button form-back-step="4" class="back-btn my-3 float-left step-4-back-btn back-btn" >Back</button>
-                <button  type="submit" class="my-3 float-right submit-btn">Submit</button>
+                <button  type="submit" name='' class="my-3 float-right submit-btn">Submit</button>
             </div>
             {{-- End Step 4 Code --}}
 
@@ -88,7 +88,6 @@
         <div class="overlay">
             <div class="overlay-panel overlay-right">
                 <h1>Welcome Back!</h1>
-                {{-- <p>To keep connected with us please login with your personal info</p> --}}
                 <a class="ghost btn" id="signIn" href="{{url('login')}}">Sign In</a>
             </div>
         </div>
