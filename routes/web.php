@@ -30,6 +30,9 @@ Route::get('/testing', function () {
 });
 
 
+Route::post('/dumy','test@result');
+
+
 // Route::get('/api/company', function () {
 //     return view('congratulations');
 // });

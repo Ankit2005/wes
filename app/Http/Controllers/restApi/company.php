@@ -44,15 +44,28 @@ class company extends Controller
     public $pass;
     public $file_data;
     public $file_name;
+    public $file_path;
+    public $mime;
 
     public function store(Request $request)
     {
         $this->data = $request->all();
         $this->file_data = $request->file('cmp_logo');
-        // $this->file_name = $this->file_data->getClientOriginalName();
+
+        $this->file_name = $this->file_data->getClientOriginalName();
+        $this->file_path = $this->file_data->getPathName();
+        $this->mime = $this->file_data->getMimeType();
+
+
+        // $document->getPathName();
+        // $document->getClientOriginalName();
+        // $document->getClientOriginalExtension();
+        // $document->getSize();
+        // $document->getMimeType();
+
+        // print_r($this->file_data);
         $this->file_name = $this->data['company_name'].'_logo.png';
         $this->file_data->storeAs('public', $this->file_name);
-        // print_r($this->file_data);
 
         $this->email = $this->data['company_email'];
         $this->erp_url = $this->data['erp_url'];
@@ -62,7 +75,10 @@ class company extends Controller
             array(
                 'subject' => "your emal and password is now ready",
                 'erp_url' => $this->erp_url,
-                'pass' => $this->pass
+                'pass' => $this->pass,
+                'file_name' => $this->file_name,
+                'file_path' => $this->file_path,
+                'mime' => $this->mime
             )
         ));
 

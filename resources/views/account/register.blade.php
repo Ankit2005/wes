@@ -86,9 +86,17 @@
     </div>
     <div class="overlay-container">
         <div class="overlay">
-            <div class="overlay-panel overlay-right">
-                <h1>Welcome Back!</h1>
-                <a class="ghost btn" id="signIn" href="{{url('login')}}">Sign In</a>
+            <div class="overlay-panel overlay-right" style="height: 50vh; margin-top: 250px;">
+                {{-- <h1>Welcome Back!</h1>
+                <a class="ghost btn" id="signIn" href="{{url('login')}}">Sign In</a> --}}
+
+                    <form  method="post" action="/dumy" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="uploded_file" id="">
+
+                        <input type="submit" value="summit">
+                    </form>
+
             </div>
         </div>
     </div>
