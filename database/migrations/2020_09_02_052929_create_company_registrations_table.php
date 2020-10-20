@@ -19,6 +19,7 @@ class CreateCompanyRegistrationsTable extends Migration
             $table->timestamps();
 
             $table->string('company_name',85);
+            $table->string('company_slug',85);
             $table->string('tagline',100)->nullable();
             $table->string('website_url',100)->nullable();
             $table->string('company_email',85);
@@ -43,6 +44,7 @@ class CreateCompanyRegistrationsTable extends Migration
             $table->string('category',50);
             $table->string('erp_url');
             $table->string('password',70);
+            $table->string('admin_mac_address', 200)->nullable();
         });
     }
 

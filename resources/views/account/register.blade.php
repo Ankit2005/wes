@@ -20,8 +20,9 @@
                 <div class="step-1 needs-validation">
                     <input type="text" autocomplete="off" class="required cmp-name" maxlength="80" placeholder="Company Name" name="company_name" />
                     <input type="url" name="erp_url"  class="erp-url d-none">
-                    <input type="password" name="password"  class="password d-none">
-                    <input type="file" accept="image/*" name="cmp_logo">
+                    <input type="text" name="company_slug"  class="company-slug d-none">
+                    <input type="text   " name="password"  class="password">
+                   {{--- <input type="file" accept="image/*" name="cmp_logo"> ---}}
 
                     <input type="text" autocomplete="off" placeholder="Tagline" name="tagline"maxlength="100" />
                     <input type="website" autocomplete="off" placeholder="Website" name="website_url" maxlength="100" class="url" />
@@ -69,12 +70,10 @@
                     <option selected desabled value="category">Category</option>
                     <option value="Educations">Educations</option>
                 </select>
-
                 <button form-back-step="4" class="back-btn my-3 float-left step-4-back-btn back-btn" >Back</button>
                 <button  type="submit" name='' class="my-3 float-right submit-btn">Submit</button>
             </div>
             {{-- End Step 4 Code --}}
-
         </form>
 
         {{-- <div class="strip">
@@ -82,21 +81,18 @@
                 Please Fill The Empty Field Frist
               </div>
         </div> --}}
-
     </div>
     <div class="overlay-container">
         <div class="overlay">
             <div class="overlay-panel overlay-right" style="height: 50vh; margin-top: 250px;">
-                {{-- <h1>Welcome Back!</h1>
-                <a class="ghost btn" id="signIn" href="{{url('login')}}">Sign In</a> --}}
-
-                    <form  method="post" action="/dumy" enctype="multipart/form-data">
+               <h1>Welcome Back!</h1>
+                <a class="ghost btn" id="signIn" href="{{url('login')}}">Sign In</a>
+                   {{--  <form  method="post" action="/dumy" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="uploded_file" id="">
 
                         <input type="submit" value="summit">
-                    </form>
-
+                    </form> --}}
             </div>
         </div>
     </div>

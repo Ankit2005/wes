@@ -29,9 +29,33 @@ Route::get('/testing', function () {
     return view('congratulations');
 });
 
+Route::get('/default', function () {
+    return view('template.default');
+});
 
 Route::post('/dumy','test@result');
 
+Route::get('/authenticate', function () {
+    return view('erp.authenticate');
+});
+
+
+Route::get('/{query}/{string}', function ($query, $string) {
+
+    if($query == 'erp'){
+
+        $query = array(
+            'query' => $query,
+            'string' => $string
+        );
+
+        $query = json_encode($query);
+        $query = base64_encode($query);
+
+        return redirect('api/company/'.$query);
+    }
+
+});
 
 // Route::get('/api/company', function () {
 //     return view('congratulations');

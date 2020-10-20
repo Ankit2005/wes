@@ -8,6 +8,7 @@ class Company_registration extends Model
 {
     protected $fillable = [
         'company_name',
+        'company_slug',
         'tagline',
         'website_url',
         'company_email',
@@ -28,7 +29,7 @@ class Company_registration extends Model
         'whatsApp_number',
         'category',
         'erp_url',
-        'password'
+        'password',
     ];
 }
 

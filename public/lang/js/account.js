@@ -63,7 +63,6 @@ $(document).ready(function () {
             });
         });
 
-
         // remove url message on input
         $(url).each(function () {
             $(this).on("input", function () {
@@ -109,11 +108,21 @@ $(document).ready(function () {
     function company_valudition(first_class, second_class) {
         const cmp_name_input = document.querySelector('.cmp-name');
         const cmp_name = $(".cmp-name").val().trim();
-        $(".erp-url").val(window.location+cmp_name.replace(/ /g,""));
+        const cmp_slug = cmp_name.replace(/ /g,'');
+        // var query = {
+        //     column_name : 'company_name',
+        //     data: cmp_name.replace(/ /g,"")
+        // }
+
+
+    //    query = btoa(JSON.stringify(query));
+
+        $(".erp-url").val(window.location+ 'erp/'+ cmp_slug);
+        $(".company-slug").val(cmp_slug);
 
         $.ajax({
             type: "get",
-            url: "/api/company/" + cmp_name,
+            url: "/erp/" + cmp_slug,
             data: {
                 _token: $("body").attr('token')
             },
@@ -133,12 +142,7 @@ $(document).ready(function () {
                     cmp_name_input.nextSibling.remove();
                 }
 
-
-
-
                 $(".password").val(password_generator());
-
-
                 $("." + first_class).addClass("d-none");
                 $("." + second_class).removeClass("d-none");
                 $("." + second_class).addClass("animate__animated animate__slideInRight");
@@ -154,15 +158,14 @@ $(document).ready(function () {
     // password generator
 
     function password_generator(){
-        charset = "abcEFGHqr>?stOPQRuvwxyz)_+|~-={}AijpnoZ012^&*3456]IJBm789!@#$%([KLdefghMNSTUVWXY:;,CDkl./";
+       var charset = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
         var pass = ' ';
         for (let index = 0; index < 8; index++) {
             var j = Math.floor(Math.random()*charset.length-1);
             pass += charset[j];
         }
-
+        // (@(a-r8l
         return pass;
-
     }
 
     // slide on back
