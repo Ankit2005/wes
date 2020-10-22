@@ -24,8 +24,9 @@
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
                     <h1 class="text-center congrs-text">congratulations</h1>
-                    
-                    <h1>{{$notice}}</h1>
+
+                    {{-- <h1>{{$notice}}</h1> --}}
+                    <h1>We Have Send Your Url And Password To Your Email !</h1>
                     {{-- <h6 class="text-center my-2 txt-light">Your Data Is Successfully Inserted <br> Please Login Your Account</h6> --}}
                     {{-- <p>Enter your personal details and start journey with us</p> --}}
                     <a class="ghost btn" id="signIn" href="{{url('login')}}">Sign In</a>

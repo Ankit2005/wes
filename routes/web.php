@@ -17,6 +17,13 @@ Route::get('/login', function () {
     return view('account/login');
 });
 
+Route::get('/congratulations', function () {
+    return view('congratulations');
+});
+Route::get('/404', function () {
+    return view('notFound');
+});
+
 Route::get('/', function () {
     return view('account/register');
 });

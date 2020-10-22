@@ -47,6 +47,7 @@ class company extends Controller
     public $file_name;
     public $file_path;
     public $mime;
+    public $all_data;
     public $client_mac_address;
 
     public function store(Request $request)
@@ -86,20 +87,31 @@ class company extends Controller
             )
         ));
 
-
-
         // $this->encrypt_pass = array('password' => md5($this->data['password']));
 
         $this->encrypt_pass = array('password' => '12345');
         $this->data = array_replace($this->data, $this->encrypt_pass);
-
 
         // print_r($this->data);
 
         // exit;
 
          Company_registration::create($this->data);
-         return  response()->view('congratulations',array("notice"=>"We Have Send Your Url And Password To Your Email !"))->header("Content-Type","text/html")->setStatusCode(201);
+        //  return  response()->view('congratulations',array("notice"=>"We Have Send Your Url And Password To Your Email !"))->header("Content-Type","text/html")->setStatusCode(201);
+
+        // Ram Memory Release Code
+        unset($_POST);
+        unset($request);
+        unset($data);
+        unset($email);
+        unset($erp_url);
+        unset($pass);
+        unset($file_data);
+        unset($file_name);
+        unset($file_path);
+        unset($mime);
+        return redirect('/congratulations');
+        exit;
     }
 
     /**
@@ -110,22 +122,51 @@ class company extends Controller
      */
     public function show($query_data, Request $request)
     {
+        $this->client_mac_address = new getMacAddress();
+        $this->client_mac_address = $this->client_mac_address->macAddress();
+
       $this->query = json_decode(base64_decode($query_data));
 
-    //   company slug validations code
+        // company slug validations code
         if($this->query->query == 'erp'){
-
             $this->data = Company_registration::where('company_slug', $this->query->string)->get();
             if(count($this->data) != 0){
                 if($request->ajax()){
                     return response(array("notice"=>"Data is found !"),200)->header("Content-Type","application/json");
+
+                    // Ram Memory Release Code
+                    unset($data);
+                    unset($client_mac_address);
                 }
                 else{
                     session()->flash('auth', $this->query->string);
+                    // find not registered admin
+                    foreach ($this->data as $this->all_data) {
+                        if(empty($this->all_data->admin_mac_address)){
+                            session()->flash('mac_authentication', 'NotRegistered');
+                        }else{
+                            if($this->all_data->admin_mac_address == $this->client_mac_address){
+                                session()->flash('mac_authentication', 'admin');
+                            }else{
+                                session()->flash('mac_authentication', 'employee');
+                            }
+                        }
+                    }
                     return response()->view('erp.authenticate')->header('Content-Type','text/html')->setStatusCode(200);
+                    // Ram Memory Release Code
+                    unset($_GET);
+                    unset($query);
+                    unset($client_mac_address);
+                    unset($all_data);
                 }
             }else{
-                return response(array("notice"=>"Data is not found !"),404)->header("Content-Type","application/json");
+                unset($_GET);
+                unset($query);
+                unset($client_mac_address);
+                unset($all_data);
+                return redirect('/404');
+                exit;
+                // return response(array("notice"=>"Data is not found !"),404)->header("Content-Type","application/json");
             }
         }
 
@@ -170,11 +211,16 @@ class company extends Controller
 
             if($this->data){
                 session()->put('admin_resignation', 'registered');
-
             }else{
                 session()->put('admin_resignation', 'not registered');
                 return response(array('notice' => 'authentication failed !'),404)->header('Content-Type', 'application/json');
             }
+
+             // Ram Memory Release Code
+             unset($_POST);
+             unset($admin_data);
+             unset($client_mac_address);
+
         }
     }
 

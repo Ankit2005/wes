@@ -28,7 +28,7 @@ $('.admin-form').on('submit', function (e) {
             // console.log('error');
             // console.log(r);
 
-            $(".notice").html('Registration Failed');
+            $(".notice").html('Registration Failed !');
         }
     });
 });
