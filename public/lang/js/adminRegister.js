@@ -22,6 +22,7 @@ $('.admin-form').on('submit', function (e) {
         },
         success: function (response) {
             $(".notice").html('Your Pc Is Now Successfully Registered');
+            window.location = '/admin';
         },
         error: function(xhr,error,r){
             // alert('faild ' + r);

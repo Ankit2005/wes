@@ -8,7 +8,7 @@ use App\Company_registration;
 use App\Mail\sendEmail;
 use Illuminate\Support\Facades\Storage;
 
-
+session_start();
 class company extends Controller
 {
     /**
@@ -160,13 +160,13 @@ class company extends Controller
                     unset($all_data);
                 }
             }else{
+                return response(array("notice"=>"Data is not found !"),404)->header("Content-Type","application/json");
                 unset($_GET);
                 unset($query);
                 unset($client_mac_address);
                 unset($all_data);
-                return redirect('/404');
+                // return redirect('/404');
                 exit;
-                // return response(array("notice"=>"Data is not found !"),404)->header("Content-Type","application/json");
             }
         }
 
@@ -210,7 +210,18 @@ class company extends Controller
             ));
 
             if($this->data){
-                session()->put('admin_resignation', 'registered');
+                // session()->put('admin_resignation', 'registered');
+                $_SESSION = array(
+                    "Authenticated" => true,
+                    "team_creator" => "ankitmb15@gmail.com",
+                    "team_role" => "admin"
+                );
+
+                // Ram Memory Release Code
+                unset($_POST);
+                unset($admin_data);
+                unset($client_mac_address);
+                return response(array('notice' => 'Admin Authenticated'),200)->header('Content-Type', 'application/json');
             }else{
                 session()->put('admin_resignation', 'not registered');
                 return response(array('notice' => 'authentication failed !'),404)->header('Content-Type', 'application/json');
@@ -220,7 +231,6 @@ class company extends Controller
              unset($_POST);
              unset($admin_data);
              unset($client_mac_address);
-
         }
     }
 
@@ -240,10 +250,8 @@ class company extends Controller
 // get client mac address code
 
 class getMacAddress{
-
     function macAddress(){
         exec('ipconfig/all', $client_info);
-
         foreach ($client_info as $data) {
             if(preg_match('/Physical Address/i', $data)){
                 $data = preg_replace("/\s+\./","",$data);

@@ -29,7 +29,7 @@ class Company_registration extends Model
         'whatsApp_number',
         'category',
         'erp_url',
-        'password',
+        'password'
     ];
 }
 

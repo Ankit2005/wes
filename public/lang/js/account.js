@@ -108,16 +108,16 @@ $(document).ready(function () {
     function company_valudition(first_class, second_class) {
         const cmp_name_input = document.querySelector('.cmp-name');
         const cmp_name = $(".cmp-name").val().trim();
-        const cmp_slug = cmp_name.replace(/ /g,'');
+        const cmp_slug = cmp_name.replace(/ /g, '');
         // var query = {
         //     column_name : 'company_name',
         //     data: cmp_name.replace(/ /g,"")
         // }
 
 
-    //    query = btoa(JSON.stringify(query));
+        //    query = btoa(JSON.stringify(query));
 
-        $(".erp-url").val(window.location+ 'erp/'+ cmp_slug);
+        $(".erp-url").val(window.location + 'erp/' + cmp_slug);
         $(".company-slug").val(cmp_slug);
 
         $.ajax({
@@ -157,11 +157,11 @@ $(document).ready(function () {
 
     // password generator
 
-    function password_generator(){
-       var charset = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+    function password_generator() {
+        var charset = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
         var pass = ' ';
         for (let index = 0; index < 8; index++) {
-            var j = Math.floor(Math.random()*charset.length-1);
+            var j = Math.floor(Math.random() * charset.length - 1);
             pass += charset[j];
         }
         // (@(a-r8l
@@ -170,26 +170,26 @@ $(document).ready(function () {
 
     // slide on back
 
-        $(".step-2-back-btn").click(function (e) {
-            e.preventDefault();
+    $(".step-2-back-btn").click(function (e) {
+        e.preventDefault();
 
-            $(".step-2").addClass("d-none");
-            $(".step-1").removeClass("d-none");
-        });
+        $(".step-2").addClass("d-none");
+        $(".step-1").removeClass("d-none");
+    });
 
-        $(".step-3-back-btn").click(function (e) {
-            e.preventDefault();
+    $(".step-3-back-btn").click(function (e) {
+        e.preventDefault();
 
-            $(".step-3").addClass("d-none");
-            $(".step-2").removeClass("d-none");
-        });
+        $(".step-3").addClass("d-none");
+        $(".step-2").removeClass("d-none");
+    });
 
-        $(".step-4-back-btn").click(function (e) {
-            e.preventDefault();
+    $(".step-4-back-btn").click(function (e) {
+        e.preventDefault();
 
-            $(".step-4").addClass("d-none");
-            $(".step-3").removeClass("d-none");
-        });
+        $(".step-4").addClass("d-none");
+        $(".step-3").removeClass("d-none");
+    });
 
 
     var testForm = document.getElementById('register_form');

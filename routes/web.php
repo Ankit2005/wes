@@ -48,22 +48,31 @@ Route::get('/authenticate', function () {
 
 
 Route::get('/{query}/{string}', function ($query, $string) {
-
     if($query == 'erp'){
-
         $query = array(
             'query' => $query,
             'string' => $string
         );
-
         $query = json_encode($query);
         $query = base64_encode($query);
-
         return redirect('api/company/'.$query);
     }
-
 });
 
 // Route::get('/api/company', function () {
 //     return view('congratulations');
 // });
+
+
+// Admin Panel Routing Start
+
+Route::get('/admin', function () {
+    return view('adminPanelView.teamDesign');
+    // return view('template.adminTemplate.adminTemplate');
+});
+
+// Route::get('/teamdesign', function () {
+//     return view('adminPanelView.teamDesign');
+// });
+
+// Admin Panel Routing End
