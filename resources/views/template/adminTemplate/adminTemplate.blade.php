@@ -9,14 +9,15 @@
 
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
+  <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="{{url('/')}}/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
-
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="demo/demo.css" rel="stylesheet" />
+  {{-- <link href="demo/demo.css" rel="stylesheet" /> --}}
   {{-- custom css start --}}
     @yield('custom-css')
   {{-- custom css end --}}
@@ -27,7 +28,8 @@
 
         {{-- sidebar start --}}
         <div class="sidebar" data-color="purple" data-background-color="white" data-image="img/sidebar-1.jpg">
-              <!--
+
+            <!--
                 Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
                 Tip 2: you can also add an image using data-image tag
@@ -128,7 +130,7 @@
                     </p>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="modal" data-target="#loginModal">
+                <li class="nav-item" data-toggle="modal" data-target="#createTeamModal">
                     <a class="nav-link" href="javascript:;" >
                     <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Create Team">control_point</i>
                     <p class="d-lg-none d-md-block">
@@ -169,11 +171,13 @@
                 </ul>
             </div>
             </div>
+
         </nav>
        <!-- End Navbar -->
             @yield('content')
         </div>
         @yield('createTeamModal')
+        @yield('simple-skeleton-loader')
     </div>
 
 
@@ -181,6 +185,7 @@
   <script src="{{url('/')}}/js/core/popper.min.js"></script>
   <script src="{{url('/')}}/js/core/bootstrap-material-design.min.js"></script>
   <script src="{{url('/')}}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
   <!-- Plugin for the momentJs  -->
   <script src="{{url('/')}}/js/plugins/moment.min.js"></script>
   <!--  Plugin for Sweet Alert -->
@@ -220,9 +225,41 @@
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   {{-- <script src="demo/demo.js"></script> --}}
   <script src="{{url('/')}}/js/main.js"></script>
-      {{-- custom js start --}}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+          // tostar service code start
+    function toasterOptions() {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "100",
+            "hideDuration": "1000",
+            "timeOut": "4000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "",
+            "showMethod": "show",
+            "hideMethod": "hide"
+        };
+    }
+    // tostar service code end
+    </script>
+
+
+
+
+
+
+
+    {{-- custom js start --}}
       @yield('custom-js')
-      {{-- custom js end --}}
+    {{-- custom js end --}}
+
 
 </body>
 </html>

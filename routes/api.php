@@ -21,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('/company','restApi\company');
 
 Route::apiResource('/team', 'restApi\teamApi');
+
+Route::apiResource('/jobrole','restApi\jobroleApi');
