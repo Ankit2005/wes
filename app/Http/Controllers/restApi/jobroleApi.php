@@ -47,7 +47,8 @@ class jobroleApi extends Controller
     public function store(Request $request)
     {
         $this->store_data = jobrole::create($request->all());
-
+        // print_r($request->all());
+        // exit;
         if($this->store_data){
             return response(array("response" => "Add New Role Successfully"),200)->header("Content-Type","application/json");
         }else{
@@ -86,7 +87,20 @@ class jobroleApi extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->get_all_data = jobrole::where("id", $id)->update(array(
+            "job_role" => $request['job_role'],
+            "qualification" => $request['qualification'],
+            "certification" => $request['certification'],
+            "experience" => $request['experience'],
+            "salary" => $request['salary'],
+            "team_name" => $request['team_name']
+        ));
+
+        if($this->get_all_data){
+            return response(array("response" => "Update Role Successfully"),200)->header("Content-Type","application/json");
+        }else{
+            return response(array("response" => "Update Failed "),400)->header("Content-Type","application/json");
+        }
     }
 
     /**
@@ -97,6 +111,19 @@ class jobroleApi extends Controller
      */
     public function destroy($id)
     {
-        //
+        //$post = jobrole::find($id);
+        $post = jobrole::where("id",$id)->delete();
+
+        // $this->get_all_data = jobrole::where("id", $id)->update(array(
+        //     "job_role" => $request['job_role'],
+        //     "salary" => $request['salary'],
+        //     "team_name" => $request['team_name']
+        // ));
+
+        return response(array("response" => "Delete Role Successfully"),200)->header("Content-Type","application/json");
+        // if($this->post == 1){
+        // }else{
+        //     return response(array("response" => "Delete Failed "),400)->header("Content-Type","application/json");
+        // }
     }
 }

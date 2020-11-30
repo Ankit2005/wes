@@ -3,9 +3,24 @@ window.onload = function () {
     $(".team-sleteton-loader").removeClass("d-none");
 }
 
-
+var token = $('body').attr('token');
 $(document).ready(function () {
-    var token = $('body').attr('token');
+
+    $("#emp_img_select").change(function () {
+        $(".avtar-dumy-img").addClass("img-hide");
+        var fileName = $(this).val();
+        var image = new Image();
+        if (fileName != '') {
+
+            image.onload = function () {
+                $(".avtar-dumy-img").removeClass("show-img");
+            }
+        } else {
+            $(".avtar-dumy-img").addClass("show-img");
+        }
+    });
+
+    //var token = $('body').attr('token');
 
     var tbody = document.getElementsByClassName("show-all-team")[0];
     var check_tr = tbody.getElementsByTagName("tr")[0];
@@ -18,7 +33,8 @@ $(document).ready(function () {
     //         alert("found tr");
     //     }
 
-    $(".admin-form-submit").submit(function (e) {
+    // create new team code
+    $(".createTeam-form-submit").submit(function (e) {
 
         e.preventDefault();
 
@@ -34,14 +50,13 @@ $(document).ready(function () {
                 url: "api/team",
                 beforeSend: function () {
                     $(".team-loader").removeClass('d-none');
-
                 },
                 data: {
                     _token: token,
-                    team_creator_role: team_creator_role,
                     team_role: team_role,
                     team_name: team_name,
-                    about_team: about_team
+                    about_team: about_team,
+                    team_creator_role: team_creator_role,
                 },
                 success: function (response) {
                     $(".team-not-found").html('');
@@ -100,10 +115,12 @@ $(document).ready(function () {
                     $(td2).append(editBtn);
                     $(td2).append(closeBtn);
 
+                    // get team name for select
+                    getTeamName();
                 },
                 error: function (ajax) {
                     if (ajax.status == 500) {
-                        toastr.error("somethig want rong !");
+                        toastr.error("Duplicate Team Name Not Allowed!");
                         $(".team-loader").addClass('d-none');
                         // $("#createTeamModal").modal('hide');
                         console.log("error !");
@@ -119,7 +136,6 @@ $(document).ready(function () {
             // $("#createTeamModal").modal('hide');
             console.log("error !");
             toasterOptions();
-
         }
 
     });
@@ -135,22 +151,48 @@ $(document).ready(function () {
     // Add New Role Store Database
     $("#add-role-form").submit(function (e) {
         e.preventDefault();
+
+        var request_type = $(".add-role-btn").attr("role");
+        var role_id = $("[name=job_role_id]").val();
+        var qualification = $("[name=qualification]").val();
+        var certification = $("[name=certification]").val();
+        var experience = $("[name=experience]").val();
+        var type = '';
+        var url = '';
+
+        if (request_type == "insert") {
+            type = "POST";
+            url = "api/jobrole";
+        }
+        if (request_type == "update") {
+            type = "PUT";
+            url = "api/jobrole/" + role_id;
+        }
+        debugger;
         $.ajax({
-            type: "POST",
-            url: "api/jobrole",
-            data: new FormData(this),
-            processData: false,
-            contentType: false,
+            type: type,
+            url: url,
+            data: {
+                _token: token,
+                id: $("[name=job_role_id]").val(),
+                job_role: $("[name=job_role]").val(),
+                qualification: qualification,
+                certification: certification,
+                experience: experience,
+                salary: $("[name=salary]").val(),
+                team_name: $("[name=team_name]").val()
+            },
             success: function (response) {
+
                 toastr.success(response.response);
                 toasterOptions();
                 $("#add-role-form")[0].reset();
-                getJobroleData();
-                getTeamName();
+                getJobroleData('addRole');
+                //getTeamName();
             },
             error: function (ajax) {
                 if (ajax.status == 500) {
-                    toastr.error("Something Went Rong !");
+                    toastr.error("Duplicate Role Not Allowed !");
                     toasterOptions();
                 }
             }
@@ -288,6 +330,33 @@ function showAllTeams(url) {
     });
 }
 
+// Delete Role Data Ajax Request
+function deleteRole(role_id) {
+    //var role_id = $("[name=job_role_id]").val();
+    $.ajax({
+        type: "DELETE",
+        url: "api/jobrole/" + role_id,
+        cache: false,
+        data: {
+            _token: token
+        },
+        success: function (response) {
+            toastr.success(response.response);
+            toasterOptions();
+            //$("#add-role-form")[0].reset();
+            // getJobroleData('addRole');
+            getJobroleData(null);
+        },
+        error: function (ajax) {
+            if (ajax.status == 500) {
+                toastr.error("Something Went Rong !");
+                toasterOptions();
+            }
+        }
+    });
+}
+
+
 // get team name for select box function
 function getTeamName() {
     const token = $('body').attr('token');
@@ -319,9 +388,8 @@ function getTeamName() {
     });
 }
 
-// Create JobRole Table
-function getJobroleData() {
-
+// Create show JobRole Table
+function getJobroleData(param) {
     const token = $('body').attr('token');
     $.ajax({
         type: "GET",
@@ -347,6 +415,7 @@ function getJobroleData() {
                 var thead = document.createElement("THEAD");
                 thead.className = "table-head";
                 var thead_tr = document.createElement("TR");
+
                 for (let i = 0; i < t_head_array.length; i++) {
                     let th = document.createElement("TH");
                     if (t_head_array[i] == 'Team Name') {
@@ -363,6 +432,9 @@ function getJobroleData() {
                 var tbody = document.createElement("TBODY");
                 data.forEach((element, index) => {
                     var tbody_tr = document.createElement("TR");
+                    if (index == 0 && param == 'addRole') {
+                        tbody_tr.className = "bg-gray animate__animated animate__backInLeft";
+                    }
 
                     // var id_td = document.createElement("TD");
                     //     id_td.className = "col-2";
@@ -380,7 +452,7 @@ function getJobroleData() {
                     team_name_td.innerHTML = element.team_name;
                     jobrole_td.innerHTML = element.job_role;
                     salary_td.innerHTML = element.salary;
-                    action_td.innerHTML = '<span class="material-icons">create </span>';
+                    action_td.innerHTML = "<button class='btn btn-primary p-2  edit-job-role'  data='" + JSON.stringify(element) + "'><span class='material-icons d-inline'>create </span></button>    <button class='btn btn-danger p-2  delete-job-role' data='" + JSON.stringify(element) + "'><span class='material-icons d-inline'>delete </span></button>";
 
                     // $(tbody_tr).append(id_td);
                     $(tbody_tr).append(team_name_td);
@@ -395,10 +467,48 @@ function getJobroleData() {
                 $(".jobrole-table").append(tbody);
 
                 // end create table body
+            } else {
+
             }
+
+            // edit job role code
+            $(".edit-job-role").each(function () {
+                $(this).click(function () {
+
+                    $(".add-role").trigger("click");
+                    let data = $(this).attr("data");
+                    data = JSON.parse(data);
+
+                    $("[name=job_role_id]").val(data.id);
+                    $("[name=job_role]").val(data.job_role);
+                    $("[name=qualification]").val(data.qualification);
+                    $("[name=certification]").val(data.certification);
+                    $("[name=experience]").val(data.experience);
+                    $("[name=salary]").val(data.salary);
+                    $("[name=team_name]").val(data.team_name);
+                    $(".add-role-btn").html("Update Role");
+                    $(".add-role-btn").attr("role", "update");
+                });
+            });
+
+
+            // delte job role click
+            $(".delete-job-role").each(function () {
+                $(this).click(function () {
+                    let delete_data = $(this).attr("data");
+                    delete_data = JSON.parse(delete_data);
+                    //$("[name=job_role_id]").val(delete_data.id);
+                    deleteRole(delete_data.id);
+                });
+            });
+
         },
         error: function (ajax) {
+            $(".jobrole-table").html("<p class='text-center'>No Data Found</p>");
             $(".team-sleteton-loader").addClass("d-none");
         }
     });
+
 }
+
+

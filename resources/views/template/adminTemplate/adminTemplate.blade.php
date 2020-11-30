@@ -4,20 +4,33 @@
   <title> @yield('title') </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
 
-  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+ <!-- Material Dashboard CSS -->
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ {{-- <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' /> --}}
+ <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+ <link href="{{url('/')}}/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+     {{-- animated.css cdn link --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  {{-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" /> --}}
+  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"> --}}
   <!-- CSS Files -->
-  <link href="{{url('/')}}/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+  {{-- <link href="{{url('/')}}/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/> --}}
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   {{-- <link href="demo/demo.css" rel="stylesheet" /> --}}
+
   {{-- custom css start --}}
     @yield('custom-css')
   {{-- custom css end --}}
@@ -96,11 +109,24 @@
             </ul>
           </div>
         </div>
-        sidebar end
+        {{-- sidebar end --}}
 
         <div class="main-panel">
         <!-- Start Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+
+        {{-- <nav class="navbar sticky-top navbar-light bg-primary">
+            <div class="container">
+              <a class="navbar-brand" href="#">Sticky top</a>
+            </div>
+        </nav> --}}
+
+        {{--
+        <nav class="navbar sticky-top navbar-light bg-light">
+            <a class="navbar-brand" href="#">Sticky top</a>
+        </nav> --}}
+
+
+        <nav class="navbar navbar-expand-lg sticky-top">
             <div class="container-fluid">
             <div class="navbar-wrapper">
                 <a class="navbar-brand" href="javascript:">@yield('activePageName')</a>
@@ -180,14 +206,13 @@
         @yield('simple-skeleton-loader')
     </div>
 
-
   <script src="{{url('/')}}/js/core/jquery.min.js"></script>
   <script src="{{url('/')}}/js/core/popper.min.js"></script>
   <script src="{{url('/')}}/js/core/bootstrap-material-design.min.js"></script>
   <script src="{{url('/')}}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 
   <!-- Plugin for the momentJs  -->
-  <script src="{{url('/')}}/js/plugins/moment.min.js"></script>
+ <script src="{{url('/')}}/js/plugins/moment.min.js"></script>
   <!--  Plugin for Sweet Alert -->
   <script src="{{url('/')}}/js/plugins/sweetalert2.js"></script>
   <!-- Forms Validations Plugin -->
@@ -213,17 +238,17 @@
   <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
   <!-- Library for adding dinamically elements -->
-  <script src="{{url('/')}}/js/plugins/arrive.min.js"></script>
+  {{-- <script src="{{url('/')}}/js/plugins/arrive.min.js"></script> --}}
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chartist JS -->
   <script src="{{url('/')}}/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
   <script src="{{url('/')}}/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{url('/')}}/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   {{-- <script src="demo/demo.js"></script> --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
   <script src="{{url('/')}}/js/main.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
@@ -245,21 +270,13 @@
             "hideEasing": "",
             "showMethod": "show",
             "hideMethod": "hide"
-        };
+        }
     }
     // tostar service code end
     </script>
 
-
-
-
-
-
-
     {{-- custom js start --}}
       @yield('custom-js')
     {{-- custom js end --}}
-
-
 </body>
 </html>

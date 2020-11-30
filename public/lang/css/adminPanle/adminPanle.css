@@ -52,6 +52,11 @@
     z-index: 11111111111111;
 }
 
+.bg-gray{
+    background-color: #f1efef !important;
+    color: black;
+}
+
 .tab-content{
     max-height: 288px;
     overflow-y: scroll;
@@ -69,6 +74,65 @@
     /* z-index: 1111111111; */
 }
 
+.jobrole-table-card-body{
+    overflow: scroll;
+    height: 333px;
+}
+
+/* show emp img css code start */
+.emp-img{
+    width: 100%;
+}
+.choose-img .material-icons{
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-file > input {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    font-size: 23px;
+    cursor: pointer;
+    opacity: 0;
+    direction: ltr;
+}
+
+.img-hide{
+    display: none !important;
+}
+.show-img{
+    display: block !important;
+}
+.fileinput-exists .fileinput-new,
+.fileinput-new .fileinput-exists {
+    display: none;
+}
+.fileinput .thumbnail>img {
+    max-height: 100%;
+    width: 100%;
+}
+.fileinput .thumbnail {
+    display: inline-block;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    max-width: 250px;
+    box-shadow: 0 10px 30px -12px rgba(0,0,0,.42), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+}
+
+/* show emp img css code  end*/
+
+
+
+.jobrole-table-card-body th{background: white; position: sticky;top: -14px;z-index: 10;}
 /* team select dropdown css */
 
 .select-team{

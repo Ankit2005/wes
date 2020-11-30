@@ -8,6 +8,9 @@ class Jobrole extends Model
 {
     protected $fillable = [
         "job_role",
+        "qualification",
+        "certification",
+        "experience",
         "salary",
         "team_name"
     ];

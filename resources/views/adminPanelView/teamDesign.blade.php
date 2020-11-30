@@ -20,14 +20,14 @@ session_start();
 
     @section('custom-css')
     <link rel="stylesheet" href="lang/css/adminPanle/adminPanle.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" /> --}}
     @endsection
 
     @section('custom-js')
     <script src="lang/js/adminPanle/adminPanle.js?cache=<?php echo time(); ?>"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
-<script type="text/javascript">
+    <script type="text/javascript">
+
 
     @endsection
 
@@ -57,8 +57,8 @@ session_start();
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#settings" data-toggle="tab">
-                                                <i class="material-icons">cloud</i> Server
+                                            <a class="nav-link" href="#ceateTeam" data-toggle="tab">
+                                                <i class="material-icons">cloud</i> Add New Team
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
@@ -128,9 +128,14 @@ session_start();
 
                                     <form class="form" id="add-role-form">
                                         @csrf
-                                        <p class="description text-center">Add Job Role</p>
+                                        <p class="description text-center m-0">Add Job Role</p>
                                         <div class="card-body">
 
+                                            <div class="form-group bmd-form-group d-none">
+                                                <div class="input-group d-none">
+                                                  <input type="text" name="job_role_id" class="form-control job_role_id">
+                                                </div>
+                                            </div>
                                             <div class="form-group bmd-form-group">
                                                 <div class="input-group">
                                                   <div class="input-group-prepend">
@@ -139,6 +144,39 @@ session_start();
                                                   <input type="text" name="job_role" class="form-control job_role" placeholder="Job Role">
                                                 </div>
                                             </div>
+
+                                             {{-- qualification input --}}
+                                                <div class="form-group bmd-form-group pb-4">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text"><i class="material-icons">school</i></div>
+                                                        </div>
+                                                        <input type="text" name="qualification" class="form-control qualification"
+                                                            placeholder="Enter Qualification">
+                                                    </div>
+                                                </div>
+
+                                                {{-- certification input --}}
+                                                <div class="form-group bmd-form-group pb-4">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text"><i class="material-icons">receipt</i></div>
+                                                        </div>
+                                                        <input type="text" name="certification" class="form-control certification"
+                                                            placeholder="Enter Certification">
+                                                    </div>
+                                                </div>
+
+                                                {{-- experience input --}}
+                                                <div class="form-group bmd-form-group pb-4">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text"><i class="material-icons">receipt_long</i></div>
+                                                        </div>
+                                                        <input type="text" name="experience" class="form-control experience"
+                                                            placeholder="Enter Experience">
+                                                    </div>
+                                                </div>
 
                                             <div class="form-group bmd-form-group">
                                                 <div class="input-group">
@@ -155,90 +193,71 @@ session_start();
                                             </div>
 
                                             <div class="text-center w-100 my-2">
-                                                <button type="submit" class="py-1 btn btn-primary btn-link btn-wd btn-lg"> Add Role
+                                                <button type="submit" class="py-1 btn btn-primary btn-link btn-wd btn-lg add-role-btn" role="insert"> Add Role
                                                     <div class="ripple-container"></div></button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="tab-pane" id="settings">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <label class="form-check-label">
-                                                            <input class="form-check-input" type="checkbox" value="">
-                                                            <span class="form-check-sign">
-                                                                <span class="check"></span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task"
-                                                        class="btn btn-primary btn-link btn-sm">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove"
-                                                        class="btn btn-danger btn-link btn-sm">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <label class="form-check-label">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                checked>
-                                                            <span class="form-check-sign">
-                                                                <span class="check"></span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>Flooded: One year later, assessing what was lost and what was found
-                                                    when a ravaging rain swept through metro Detroit
-                                                </td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task"
-                                                        class="btn btn-primary btn-link btn-sm">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove"
-                                                        class="btn btn-danger btn-link btn-sm">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <label class="form-check-label">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                checked>
-                                                            <span class="form-check-sign">
-                                                                <span class="check"></span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task"
-                                                        class="btn btn-primary btn-link btn-sm">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove"
-                                                        class="btn btn-danger btn-link btn-sm">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="tab-pane" id="ceateTeam">
+                                    <form class="form createTeam-form-submit ">
+                            @csrf
+                            <p class="description text-center"><b
+                                    class="font-weight-bold text-uppercase text-dark">Manage your employees group by
+                                    creating a team such as service team, back and team and many more</b></p>
+                            <div class="card-body">
+
+                                {{-- hidden role input --}}
+                                <div class="form-group bmd-form-group pb-4 d-none ">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="hidden" class="form-control team-role" name="team_role"
+                                            value="{{ $_SESSION['team_role'] }}"
+                                            placeholder="Enter Team Name">
+                                    </div>
+                                </div>
+
+                                {{-- team name input --}}
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="material-icons">face</i></div>
+                                        </div>
+                                        <input type="text" name="team_name" class="form-control team-name"
+                                            placeholder="Enter Team Name">
+                                    </div>
+                                </div>
+
+                                {{-- about team textarea --}}
+                                <div class="form-group bmd-form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="material-icons">perm_identity</i>
+                                            </div>
+                                        </div>
+                                        <textarea class="form-control about-team" name="about_team"
+                                            id="exampleFormControlTextarea1" placeholder="Describe Somethig About Team."
+                                            rows="1"></textarea>
+                                    </div>
+                                </div>
+
+                                 {{-- hidden team_creator_role input --}}
+                                 <div class="form-group bmd-form-group pb-4 d-none">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="hidden" class="form-control team-creator-role"
+                                            name="team_creator_role"
+                                            value="{{ $_SESSION['team_creator'] }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center justify-content-center">
+                                <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg"> Create Team
+                                </button>
+                            </div>
+                        </form>
 
                                 </div>
                             </div>
@@ -261,7 +280,7 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body jobrole-table-card-body">
                               {{-- loadder desing code START --}}
                                 <div class="ph-item p-0 py-2 border-0 team-sleteton-loader ">
                                     <div class="ph-col-12 ">
@@ -299,7 +318,7 @@ session_start();
                                     </div>
                                 </div>
                                 {{-- loadder desing code END --}}
-                            <table class="table jobrole-table table-responsive">
+                            <table class="table jobrole-table">
 
                             </table>
                         </div>
@@ -503,63 +522,66 @@ session_start();
                         </div>
                         {{-- loadder desing code END --}}
 
-                        <form class="form admin-form-submit ">
-                            @csrf
-                            <p class="description text-center"><b
-                                    class="font-weight-bold text-uppercase text-dark">Manage your employees group by
-                                    creating a team such as service team, back and team and many more</b></p>
-                            <div class="card-body">
-                                {{-- hidden email input --}}
-                                <div class="form-group bmd-form-group pb-4 d-none">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        </div>
-                                        <input type="hidden" class="form-control team-creator-role"
-                                            name="team_creator_role"
-                                            value="{{ $_SESSION['team_creator'] }}">
+                    <form>
+                        @csrf
+
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class=" avtar-dumy-img ">
+                                        <img src="http://style.anu.edu.au/_anu/4/images/placeholders/person_8x10.png" width="100"  rel="nofollow" alt="...">
+                                    </div>
+
+                                    <div class="fileinput-preview fileinput-exists emp-img thumbnail img-raised"></div>
+                                    <div class="d-flex">
+                                        <span class="btn-raised  btn-default btn-file">
+                                            <span class="fileinput-new text-primary choose-img">
+                                                <span class="material-icons"> add_circle_outline </span>
+                                            </span>
+                                            <span class="fileinput-exists text-primary">Change</span>
+                                            <input type="file" id="emp_img_select" name="..." />
+                                        </span>
+                                        {{--  <a href="#pablo" class="btn btn-danger remove-img-btn btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>--}}
                                     </div>
                                 </div>
+                            </div>
 
-                                {{-- hidden role input --}}
-                                <div class="form-group bmd-form-group pb-4 d-none ">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        </div>
-                                        <input type="hidden" class="form-control team-role" name="team_role"
-                                            value="{{ $_SESSION['team_role'] }}"
-                                            placeholder="Enter Team Name">
-                                    </div>
-                                </div>
-
-                                {{-- team name input --}}
+                            <div class="col-9">
                                 <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text"><i class="material-icons">face</i></div>
-                                        </div>
                                         <input type="text" name="team_name" class="form-control team-name"
                                             placeholder="Enter Team Name">
                                     </div>
                                 </div>
-
-                                {{-- about team textarea --}}
-                                <div class="form-group bmd-form-group">
+                                <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text"><i class="material-icons">perm_identity</i>
-                                            </div>
-                                        </div>
-                                        <textarea class="form-control about-team" name="about_team"
-                                            id="exampleFormControlTextarea1" placeholder="Describe Somethig About Team."
-                                            rows="1"></textarea>
+                                        <input type="text" name="team_name" class="form-control team-name"
+                                            placeholder="Enter Team Name">
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-center justify-content-center">
-                                <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg"> Create Team
-                                </button>
+
+                            <div class="col-12">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="team_name" class="form-control team-name"
+                                            placeholder="Enter Team Name">
+                                    </div>
+                                </div>
                             </div>
-                        </form>
+                            <div class="col-12">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="team_name" class="form-control team-name"
+                                            placeholder="Enter Team Name">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
                     </div>
                 </div>
             </div>

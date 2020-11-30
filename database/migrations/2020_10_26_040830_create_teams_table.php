@@ -16,10 +16,10 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('team_creator_role',100);
             $table->string('team_role', 50);
-            $table->string('team_name', 50);
+            $table->string('team_name', 50)->unique();
             $table->string('about_team', 200);
+            $table->string('team_creator_role',100);
         });
     }
 
