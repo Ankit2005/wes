@@ -36,7 +36,6 @@ session_start();
 
     <div class="content">
         <div class="container-fluid">
-
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <div class="card">
@@ -62,9 +61,10 @@ session_start();
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </li>
-                                        <li class="nav-item py-2 text-right w-100px">
+                                        <li class="nav-item py-2 text-right">
                                             <a>Total : <span class="badge badge-info total-team">0</span></a>
                                         </li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -113,7 +113,6 @@ session_start();
                                                     <div class="ph-col-2 big"></div>
                                                     <div class="ph-col-4"></div>
                                                     <div class="ph-col-8 empty"></div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -442,6 +441,7 @@ session_start();
                             <div class="ct-chart" id="completedTasksChart"></div>
                         </div>
                         <div class="card-body">
+
                             <h4 class="card-title">Completed Tasks</h4>
                             <p class="card-category">Last Campaign Performance</p>
                         </div>
@@ -500,17 +500,17 @@ session_start();
 
     @section('createTeamModal')
     {{-- create team modal popup design code start --}}
-    <div class="modal fade" id="createTeamModal" tabindex="-1" role="">
-        <div class="modal-dialog modal-login" role="document">
+    <div class="modal fade ctm " id="createTeamModal" tabindex="-1" role="" >
+        <div class="modal-dialog modal-lg modal-login" role="document">
             <div class="modal-content">
                 <div class="card card-signup card-plain">
                     <div class="modal-header">
                         <div class="card-header card-header-primary text-center w-100 py-4">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <button type="button" class="close" id="closeEmpPopup" data-dismiss="modal" aria-hidden="true">
                                 <i class="material-icons text-white">clear</i>
                             </button>
                             <div class="social-line">
-                                <h4 class="card-title text-center">CREATE NEW TEAM</h4>
+                                <h4 class="card-title text-center">Add New Employee</h4>
                             </div>
                         </div>
                     </div>
@@ -526,10 +526,10 @@ session_start();
                         @csrf
 
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-xs-12 col-sm-3">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class=" avtar-dumy-img ">
-                                        <img src="http://style.anu.edu.au/_anu/4/images/placeholders/person_8x10.png" width="100"  rel="nofollow" alt="...">
+                                        <img src="http://style.anu.edu.au/_anu/4/images/placeholders/person_8x10.png" class="w-100"  rel="nofollow" alt="...">
                                     </div>
 
                                     <div class="fileinput-preview fileinput-exists emp-img thumbnail img-raised"></div>
@@ -546,38 +546,169 @@ session_start();
                                 </div>
                             </div>
 
-                            <div class="col-9">
+                            <div class="col-xs-12 col-sm-9">
                                 <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
-                                        <input type="text" name="team_name" class="form-control team-name"
-                                            placeholder="Enter Team Name">
+                                        <input type="text" name="first_name" class="form-control team-name"
+                                            placeholder="First Name">
                                     </div>
                                 </div>
                                 <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
-                                        <input type="text" name="team_name" class="form-control team-name"
-                                            placeholder="Enter Team Name">
+                                        <input type="text" name="last_name" class="form-control team-name"
+                                            placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="address1" class="form-control team-name"
+                                            placeholder="Address1">
+                                    </div>
+                                </div>
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="address2" class="form-control team-name"
+                                            placeholder="Address2">
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="col-sm-12 col-md-5">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="contact" class="form-control team-name"
+                                            placeholder="Contact">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="email" class="form-control team-name"
+                                            placeholder="Email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="designation" class="form-control team-name"
+                                            placeholder="Designation">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="department" class="form-control team-name"
+                                            placeholder="Department">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="region" class="form-control team-name"
+                                            placeholder="Region">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label class="mb-1">Gender</label>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-check mt-0 form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="male" checked>
+                                                Male
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="form-check mt-0 form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="female" >
+                                                Female
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <label>Birth Date</label>
+                                    <div class="input-group">
+                                        <input type="date" name="birth_date" class="form-control team-name"
+                                            placeholder="Birth Date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <label>Hire Date</label>
+                                    <div class="input-group">
+                                        <input type="date" name="hire_date" class="form-control team-name"
+                                            placeholder="Hire Date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" value="">
+                                        Last Job Details
+                                        <span class="form-check-sign">
+                                            <span class="check" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
                             <div class="col-12">
-                                <div class="form-group bmd-form-group pb-4">
-                                    <div class="input-group">
-                                        <input type="text" name="team_name" class="form-control team-name"
-                                            placeholder="Enter Team Name">
+                                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                    <div class="card card-body">
+                                        <h5 class="text-center"><b>Last Job Details</b></h5>
+                                        <div class="col-12">
+                                            <div class="form-group bmd-form-group pb-4">
+                                                <div class="input-group">
+                                                    <input type="text" name="department" class="form-control team-name"
+                                                        placeholder="Department">
+                                                </div>
+                                            </div>
+                                            <div class="form-group bmd-form-group pb-4">
+                                                <div class="input-group">
+                                                    <input type="text" name="company_name" class="form-control team-name"
+                                                        placeholder="Company Name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group bmd-form-group pb-4">
+                                                <div class="input-group">
+                                                    <input type="text" name="company_address" class="form-control team-name"
+                                                        placeholder="Company Address">
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label>Upload Last 4 Salary Slip</label>
+                                                <div class="form-group form-file-upload form-file-multiple is-focused">
+                                                    <input type="file" multiple="" class="inputFileHidden">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control inputFileVisible" placeholder="Multiple Files" multiple>
+                                                        <span class="input-group-btn">
+                                                            <button type="button" class="btn btn-fab btn-round btn-info">
+                                                                <i class="material-icons">layers</i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-group bmd-form-group pb-4">
-                                    <div class="input-group">
-                                        <input type="text" name="team_name" class="form-control team-name"
-                                            placeholder="Enter Team Name">
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
 
                         <button type="submit" class="btn btn-primary">Sign in</button>

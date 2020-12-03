@@ -37,7 +37,7 @@
 
 </head>
 <body token="{{csrf_token()}}">
-    <div class="wrapper">
+    <div class="wrapper main-layout">
 
         {{-- sidebar start --}}
         <div class="sidebar" data-color="purple" data-background-color="white" data-image="img/sidebar-1.jpg">
@@ -156,7 +156,7 @@
                     </p>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="modal" data-target="#createTeamModal">
+                <li class="nav-item" id="openMPopup" data-toggle="modal" data-target="#createTeamModal">
                     <a class="nav-link" href="javascript:;" >
                     <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Create Team">control_point</i>
                     <p class="d-lg-none d-md-block">

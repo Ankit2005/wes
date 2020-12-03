@@ -17,7 +17,6 @@ $(document).ready(function() {
       if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
         $('.fixed-plugin .dropdown').addClass('open');
       }
-
     }
 
     $('.fixed-plugin a').click(function(event) {

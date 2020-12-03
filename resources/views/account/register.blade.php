@@ -1,3 +1,4 @@
+
 @extends('auth_layout.auth_template')
 
 @section('register')

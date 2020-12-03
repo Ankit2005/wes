@@ -167,3 +167,23 @@
       opacity: 0;
     }
   }
+
+
+  .wrapper.main-layout {
+    position: relative;
+    top: -25px !important;
+    height: 100vh;
+  }
+
+  .main-layout .main-panel>.content {
+    margin-top: 0px !important;
+    padding: 30px 15px;
+    min-height: calc(100vh - 123px);
+}
+
+
+.ctm .form-group {
+    padding-bottom: 10px;
+    position: relative;
+    margin: 0px 0 0;
+}

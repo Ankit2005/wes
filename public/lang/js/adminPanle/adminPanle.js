@@ -1,17 +1,25 @@
 window.onload = function () {
     showAllTeams('api/team?page=1');
     $(".team-sleteton-loader").removeClass("d-none");
+
+    // modal popup
+    const showModal = localStorage.getItem("showPopup");
+    if (showModal == "true") {
+        $("#createTeamModal").modal("show");
+    }
+    else if (showModal == "false") {
+        $("#createTeamModal").modal("hide");
+    }
+
 }
 
 var token = $('body').attr('token');
 $(document).ready(function () {
-
     $("#emp_img_select").change(function () {
         $(".avtar-dumy-img").addClass("img-hide");
         var fileName = $(this).val();
         var image = new Image();
         if (fileName != '') {
-
             image.onload = function () {
                 $(".avtar-dumy-img").removeClass("show-img");
             }
@@ -35,16 +43,12 @@ $(document).ready(function () {
 
     // create new team code
     $(".createTeam-form-submit").submit(function (e) {
-
         e.preventDefault();
-
         const team_creator_role = $(".team-creator-role").val();
         const team_role = $(".team-role").val();
         const team_name = $(".team-name").val();
         const about_team = $(".about-team").val();
-
         if (team_name != "" && about_team != "") {
-
             $.ajax({
                 type: "POST",
                 url: "api/team",
@@ -68,7 +72,6 @@ $(document).ready(function () {
                     console.log(response);
                     toastr.success(response.notice);
 
-
                     var tr = document.createElement("TR");
                     tr.className = "border-bottom";
                     $(".show-all-team").append(tr);
@@ -85,7 +88,6 @@ $(document).ready(function () {
                     p.className = "text-capitalize m-0 txt-gray";
                     p.innerHTML = response.data.about_team;
                     $(td).append(p);
-
 
                     // Create 2 TD
                     var td2 = document.createElement("TD");
@@ -128,9 +130,7 @@ $(document).ready(function () {
                     }
                 }
             });
-
         } else {
-
             toastr.error("Please Fill All Filed Frist !");
             $(".team-loader").addClass('d-none');
             // $("#createTeamModal").modal('hide');
@@ -151,7 +151,6 @@ $(document).ready(function () {
     // Add New Role Store Database
     $("#add-role-form").submit(function (e) {
         e.preventDefault();
-
         var request_type = $(".add-role-btn").attr("role");
         var role_id = $("[name=job_role_id]").val();
         var qualification = $("[name=qualification]").val();
@@ -199,9 +198,17 @@ $(document).ready(function () {
         });
     });
 
+    // close modal
+    $('#closeEmpPopup').click(function (e) {
+        localStorage.setItem("showPopup", false);
+    });
+
+    // open mddal
+    $('#openMPopup').click(function (e) {
+        localStorage.setItem("showPopup", true);
+    });
+
 });
-
-
 
 function showAllTeams(url) {
     $(".show-all-team").html("");

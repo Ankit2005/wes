@@ -15,6 +15,7 @@ $(document).ready(function () {
             e.preventDefault();
             empty_field_validation("step-3", "step-4");
         });
+        
     });
 
     // validate on next click
@@ -208,3 +209,4 @@ $(document).ready(function () {
 
     // }
 });
+

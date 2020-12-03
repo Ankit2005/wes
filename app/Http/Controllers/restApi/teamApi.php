@@ -30,7 +30,6 @@ class teamApi extends Controller
             } else{
                 return response(array("error" => "Team Not Found"),404)->header("Content-Type","application/json");
             }
-
         }
 
         // get all team for select-box add role
