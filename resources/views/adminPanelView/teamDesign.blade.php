@@ -19,7 +19,7 @@ session_start();
     @endsection
 
     @section('custom-css')
-    <link rel="stylesheet" href="lang/css/adminPanle/adminPanle.css">
+    <link rel="stylesheet" href="lang/css/adminPanle/adminPanle.scss">
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" /> --}}
     @endsection
 
@@ -41,7 +41,39 @@ session_start();
                     <div class="card">
                         <div class="card-header card-header-tabs card-header-primary">
                             <div class="nav-tabs-navigation">
+
                                 <div class="nav-tabs-wrapper">
+                                    <button class="btn btn-primary createteam" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                        Button with data-target
+                                    </button>
+                                    <div class="collapse" id="collapseExample">
+                                    <div class="">
+                                        <ul class="nav nav-tabs" data-tabs="tabs">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                                    <i class="material-icons">groups</i> Team List
+                                                    <div class="ripple-container"></div>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link add-role" href="#addRole" data-toggle="tab">
+                                                    <i class="material-icons">add</i> Add Role
+                                                    <div class="ripple-container"></div>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#ceateTeam" data-toggle="tab">
+                                                    <i class="material-icons">cloud</i> Add New Team
+                                                    <div class="ripple-container"></div>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item py-2 text-right">
+                                                <a class="pl-2">Total : <span class="badge badge-info total-team">0</span></a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                    </div>
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="nav-item">
                                             <a class="nav-link active" href="#profile" data-toggle="tab">
@@ -62,7 +94,7 @@ session_start();
                                             </a>
                                         </li>
                                         <li class="nav-item py-2 text-right">
-                                            <a>Total : <span class="badge badge-info total-team">0</span></a>
+                                            <a class="pl-2">Total : <span class="badge badge-info total-team">0</span></a>
                                         </li>
 
                                     </ul>
@@ -499,7 +531,7 @@ session_start();
 
 
     @section('createTeamModal')
-    {{-- create team modal popup design code start --}}
+    {{-- Add New Employee modal popup design code start --}}
     <div class="modal fade ctm " id="createTeamModal" tabindex="-1" role="" >
         <div class="modal-dialog modal-lg modal-login" role="document">
             <div class="modal-content">
@@ -524,7 +556,6 @@ session_start();
 
                     <form>
                         @csrf
-
                         <div class="row">
                             <div class="col-xs-12 col-sm-3">
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -539,7 +570,7 @@ session_start();
                                                 <span class="material-icons"> add_circle_outline </span>
                                             </span>
                                             <span class="fileinput-exists text-primary">Change</span>
-                                            <input type="file" id="emp_img_select" name="..." />
+                                            <input type="file" name="emp_img" id="emp_img_select" name="..." />
                                         </span>
                                         {{--  <a href="#pablo" class="btn btn-danger remove-img-btn btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>--}}
                                     </div>
@@ -549,30 +580,74 @@ session_start();
                             <div class="col-xs-12 col-sm-9">
                                 <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
-                                        <input type="text" name="first_name" class="form-control team-name"
-                                            placeholder="First Name">
+                                        <input type="text" name="emp_name" class="form-control team-name"
+                                            placeholder="Employee Name">
+                                    </div>
+                                </div>
+                                <div class="form-group bmd-form-group pb-4">
+                                    {{--  <label for="exampleFormControlSelect1">Select Job Role</label>--}}
+                                    <select class="form-control" id="select-jobRole">
+
+                                     </select>
+                                     <input type="hidden" name="" class="job_role_salary" value="0">
+                                </div>
+
+                               <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="Designation" class="form-control Designation"
+                                            placeholder="Designation">
                                     </div>
                                 </div>
                                 <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
-                                        <input type="text" name="last_name" class="form-control team-name"
-                                            placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-group bmd-form-group pb-4">
-                                    <div class="input-group">
-                                        <input type="text" name="address1" class="form-control team-name"
-                                            placeholder="Address1">
-                                    </div>
-                                </div>
-                                <div class="form-group bmd-form-group pb-4">
-                                    <div class="input-group">
-                                        <input type="text" name="address2" class="form-control team-name"
-                                            placeholder="Address2">
+                                        <input type="text" name="Department" class="form-control Department"
+                                            placeholder="Department">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-5">
+
+                            <div class="col-sm-12 col-md-4">
+                                <div class="form-group  emp-file-upload">
+                                    <input type="file" name="residential_proof" multiple="" class="inputFileHidden emp-proof-upload">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control inputFileVisible" placeholder="Residential Proof">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-fab btn-round btn-primary">
+                                                <i class="material-icons">apartment</i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <div class="form-group  emp-file-upload">
+                                    <input type="file" name="qualification_proof" multiple="" class="inputFileHidden emp-proof-upload">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control inputFileVisible" placeholder="Qualification Proof">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-fab btn-round btn-primary">
+                                                <i class="material-icons">school</i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <div class="form-group emp-file-upload">
+                                    <input type="file" name="certification_proof" multiple="" class=" emp-proof-upload">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control " placeholder="Certification Proof">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-fab btn-round btn-primary">
+                                                <i class="material-icons">card_membership</i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
                                         <input type="text" name="contact" class="form-control team-name"
@@ -580,7 +655,7 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-7">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
                                         <input type="text" name="email" class="form-control team-name"
@@ -588,22 +663,57 @@ session_start();
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
-                                        <input type="text" name="designation" class="form-control team-name"
-                                            placeholder="Designation">
+                                        <input type="text" name="region" class="form-control team-name"
+                                            placeholder="Region">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
-                                        <input type="text" name="department" class="form-control team-name"
-                                            placeholder="Department">
+                                        <input type="text" name="street_address" class="form-control street_address"
+                                            placeholder="Street Address">
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="city" class="form-control city-name"
+                                            placeholder="City">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="pincode" class="form-control pincode"
+                                            placeholder="Picode">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="state" class="form-control state-name"
+                                            placeholder="State">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="country" class="form-control country-name"
+                                            placeholder="Country">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
@@ -671,7 +781,7 @@ session_start();
                             <div class="col-12">
                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                                     <div class="card card-body">
-                                        <h5 class="text-center"><b>Last Job Details</b></h5>
+                                        <h5 class="text-center"><b>You Worked Any Where Before</b></h5>
                                         <div class="col-12">
                                             <div class="form-group bmd-form-group pb-4">
                                                 <div class="input-group">
@@ -718,9 +828,6 @@ session_start();
             </div>
         </div>
     </div>
-    {{-- create team modal popup design code end --}}
+    {{-- Add New Employee modal popup design code end --}}
     @endsection
-
-
-
 @endif
