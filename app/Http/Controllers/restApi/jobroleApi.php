@@ -25,7 +25,14 @@ class jobroleApi extends Controller
                 return response(array("response" => "No Jobrole Found "),404)->header("Content-Type","application/json");
             }
         }
-
+        else if($request['type'] == 'show-only-jobRole-adn-salary'){
+            $this->get_all_data = Jobrole::get(['salary','job_role']);
+            if(count($this->get_all_data) != 0){
+                return response(array("response" => $this->get_all_data),200)->header("Content-Type","application/json");
+            }else{
+                return response(array("response" => "No Jobrole Found "),404)->header("Content-Type","application/json");
+            }
+        }
     }
 
     /**

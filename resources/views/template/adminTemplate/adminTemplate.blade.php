@@ -1,19 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <title> @yield('title') </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
-
+   {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
  <!-- Material Dashboard CSS -->
  <!-- Required meta tags -->
  <meta charset="utf-8">
  {{-- <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' /> --}}
  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-
  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
  <link href="{{url('/')}}/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -28,21 +26,21 @@
   {{-- <link href="{{url('/')}}/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/> --}}
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  {{-- <link href="demo/demo.css" rel="stylesheet" /> --}}
 
+
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="demo/demo.css" rel="stylesheet" />
   {{-- custom css start --}}
     @yield('custom-css')
   {{-- custom css end --}}
 
 </head>
-<body token="{{csrf_token()}}">
+<body token="{{csrf_token()}}" class="">
     <div class="wrapper main-layout">
 
         {{-- sidebar start --}}
         <div class="sidebar" data-color="purple" data-background-color="white" data-image="img/sidebar-1.jpg">
-
-            <!--
+              <!--
                 Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
                 Tip 2: you can also add an image using data-image tag
@@ -113,20 +111,7 @@
 
         <div class="main-panel">
         <!-- Start Navbar -->
-
-        {{-- <nav class="navbar sticky-top navbar-light bg-primary">
-            <div class="container">
-              <a class="navbar-brand" href="#">Sticky top</a>
-            </div>
-        </nav> --}}
-
-        {{--
-        <nav class="navbar sticky-top navbar-light bg-light">
-            <a class="navbar-brand" href="#">Sticky top</a>
-        </nav> --}}
-
-
-        <nav class="navbar navbar-expand-lg sticky-top">
+        <nav class="navbar navbar-expand-lg topbar-fix">
             <div class="container-fluid">
             <div class="navbar-wrapper">
                 <a class="navbar-brand" href="javascript:">@yield('activePageName')</a>
@@ -135,10 +120,20 @@
                 <span class="sr-only">Toggle navigation</span>
                 <span class="navbar-toggler-icon icon-bar"></span>
                 <span class="navbar-toggler-icon icon-bar"></span>
-                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon    icon-bar"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end">
+                <div class="mr-4">
+                    <div class="togglebutton">
+                        <label>
+                          <input id="switch" class="dark-mode-swithch" type="checkbox">
+                            <span class="toggle"></span>
+                               Dark Mode off
+                        </label>
+                    </div>
+                </div>
                 <form class="navbar-form">
+
                 <div class="input-group no-border">
                     <input type="text" value="" class="form-control" placeholder="Search...">
                     <button type="submit" class="btn btn-white btn-round btn-just-icon">
@@ -197,7 +192,6 @@
                 </ul>
             </div>
             </div>
-
         </nav>
        <!-- End Navbar -->
             @yield('content')
@@ -206,13 +200,13 @@
         @yield('simple-skeleton-loader')
     </div>
 
+
   <script src="{{url('/')}}/js/core/jquery.min.js"></script>
   <script src="{{url('/')}}/js/core/popper.min.js"></script>
   <script src="{{url('/')}}/js/core/bootstrap-material-design.min.js"></script>
   <script src="{{url('/')}}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-
   <!-- Plugin for the momentJs  -->
- <script src="{{url('/')}}/js/plugins/moment.min.js"></script>
+  <script src="{{url('/')}}/js/plugins/moment.min.js"></script>
   <!--  Plugin for Sweet Alert -->
   <script src="{{url('/')}}/js/plugins/sweetalert2.js"></script>
   <!-- Forms Validations Plugin -->
@@ -238,18 +232,22 @@
   <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
   <!-- Library for adding dinamically elements -->
-  {{-- <script src="{{url('/')}}/js/plugins/arrive.min.js"></script> --}}
+  <script src="{{url('/')}}/js/plugins/arrive.min.js"></script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chartist JS -->
-  <script src="{{url('/')}}/js/plugins/chartist.min.js"></script>
+  {{-- <script src="{{url('/')}}/js/plugins/chartist.min.js"></script> --}}
   <!--  Notifications Plugin    -->
   <script src="{{url('/')}}/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+
+  <script src="{{url('/')}}/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
 
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   {{-- <script src="demo/demo.js"></script> --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
   <script src="{{url('/')}}/js/main.js"></script>
+
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
           // tostar service code start
@@ -274,9 +272,9 @@
     }
     // tostar service code end
     </script>
-
-    {{-- custom js start --}}
+      {{-- custom js start --}}
       @yield('custom-js')
-    {{-- custom js end --}}
+      {{-- custom js end --}}
+
 </body>
 </html>
