@@ -1,4 +1,6 @@
 
+
+
 let showDarkMode = localStorage.getItem("darkMode");
 var decider = document.getElementById('switch');
 // Dark mode code
@@ -599,6 +601,52 @@ function getJobroleData(param) {
         var options = $("#select-jobRole option");
         var salary = $(options[select_index]).attr("salary");
         $(".job_role_salary").val(salary);
+    });
+
+}
+
+
+// get only job role for show in add employee form select box
+function getAllJobRoleForAddEmpForm() {
+    const token = $('body').attr('token');
+    $.ajax({
+        type: "GET",
+        url: "api/jobrole",
+        data: {
+            _token: token,
+            type: "show-only-jobRole-adn-salary"
+        },
+        beforeSend: function () {
+            //$(".team-sleteton-loader").removeClass("d-none");
+        },
+        success: function (response) {
+            // $(".team-sleteton-loader").addClass("d-none");
+            console.log("get new jobrole data");
+            console.log(response);
+            if (response.response != null && response.response.length > 0) {
+
+                $("#select-jobRole").html('');
+                var defaul_opt = document.createElement("OPTION");
+                    defaul_opt.innerHTML = "Select Job Role";
+                    defaul_opt.salary = "0";
+                $("#select-jobRole").append(defaul_opt);
+
+                response.response.forEach(data => {
+                    var jobRole_name = data.job_role;
+                    var opt = document.createElement("OPTION");
+                        $(opt).attr("salary", data.salary);
+                    opt.innerHTML = jobRole_name;
+                    $("#select-jobRole").append(opt);
+                });
+
+            }
+        },
+        error: function (ajax) {
+            $("#select-jobRole").html('');
+            var opt = document.createElement("OPTION");
+            opt.innerHTML = "Job Role Not Found";
+            $("#select-jobRole").append(opt);
+        }
     });
 
 }

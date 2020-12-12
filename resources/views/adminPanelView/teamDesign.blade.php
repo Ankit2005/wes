@@ -570,8 +570,9 @@ session_start();
                                                 <span class="material-icons"> add_circle_outline </span>
                                             </span>
                                             <span class="fileinput-exists text-primary">Change</span>
-                                            <input type="file" accept="image/*" name="emp_img" id="emp_img_select" name="..." />
+                                            <input type="file" accept="image/*" name="emp_img" id="emp_img_select"  />
                                             <small class="file-name mx-2"></small>
+                                            <input type="file" name="emp_img" id="emp_img_select"  />
                                         </span>
                                         {{--  <a href="#pablo" class="btn btn-danger remove-img-btn btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>--}}
                                     </div>
@@ -644,6 +645,46 @@ session_start();
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-fab btn-round btn-primary">
                                                 <i class="material-icons">card_membership</i>
+                                        <input type="text" name="Department" class="form-control Department"
+                                            placeholder="Department">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-4">
+                                <div class="form-group  emp-file-upload">
+                                    <input type="file" name="residential_proof" multiple="" class="inputFileHidden emp-proof-upload">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control inputFileVisible" placeholder="Residential Proof">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-fab btn-round btn-primary">
+                                                <i class="material-icons">apartment</i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <div class="form-group  emp-file-upload">
+                                    <input type="file" name="qualification_proof" multiple="" class="inputFileHidden emp-proof-upload">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control inputFileVisible" placeholder="Qualification Proof">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-fab btn-round btn-primary">
+                                                <i class="material-icons">school</i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <div class="form-group emp-file-upload">
+                                    <input type="file" name="certification_proof" multiple="" class=" emp-proof-upload">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control " placeholder="Certification Proof">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-fab btn-round btn-primary">
+                                                <i class="material-icons">card_membership</i>
                                             </button>
                                         </span>
                                     </div>
@@ -690,6 +731,42 @@ session_start();
                                     <div class="input-group">
                                         <input type="text" name="city" class="form-control city-name"
                                             placeholder="City">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="pincode" class="form-control pincode"
+                                            placeholder="Picode">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="state" class="form-control state-name"
+                                            placeholder="State">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="city" class="form-control city-name"
+                                            placeholder="City">
+                                        <input type="text" name="country" class="form-control country-name"
+                                            placeholder="Country">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group bmd-form-group pb-4">
+                                    <div class="input-group">
+                                        <input type="text" name="region" class="form-control team-name"
+                                            placeholder="Region">
                                     </div>
                                 </div>
                             </div>
@@ -785,6 +862,11 @@ session_start();
                                                         <input type="text" name="prev_company_name" class="form-control prev-company-name"
                                                             placeholder="Company Name">
                                                     </div>
+                                        <div class="col-12">
+                                            <div class="form-group bmd-form-group pb-4">
+                                                <div class="input-group">
+                                                    <input type="text" name="department" class="form-control team-name"
+                                                        placeholder="Department">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
