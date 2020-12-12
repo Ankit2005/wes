@@ -52,6 +52,13 @@
 .close:focus {
     outline: none !important;
 }
+
+.upload-salary-sleep{
+    z-index: 1 !important;
+    position: absolute !important;
+    opacity: 0 !important;
+}
+
 .input-group .input-group-text {
     display: flex;
     justify-content: center;

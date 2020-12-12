@@ -554,7 +554,7 @@ session_start();
                         </div>
                         {{-- loadder desing code END --}}
 
-                    <form>
+                    <form id="add-employee" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-xs-12 col-sm-3">
@@ -570,7 +570,8 @@ session_start();
                                                 <span class="material-icons"> add_circle_outline </span>
                                             </span>
                                             <span class="fileinput-exists text-primary">Change</span>
-                                            <input type="file" name="emp_img" id="emp_img_select" name="..." />
+                                            <input type="file" accept="image/*" name="emp_img" id="emp_img_select" name="..." />
+                                            <small class="file-name mx-2"></small>
                                         </span>
                                         {{--  <a href="#pablo" class="btn btn-danger remove-img-btn btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>--}}
                                     </div>
@@ -586,21 +587,21 @@ session_start();
                                 </div>
                                 <div class="form-group bmd-form-group pb-4">
                                     {{--  <label for="exampleFormControlSelect1">Select Job Role</label>--}}
-                                    <select class="form-control" id="select-jobRole">
+                                    <select name="job_role" class="form-control" id="select-jobRole">
 
                                      </select>
-                                     <input type="hidden" name="" class="job_role_salary" value="0">
+                                     <input type="hidden" name="job_role_salary" class="job_role_salary" value="0">
                                 </div>
 
                                <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
-                                        <input type="text" name="Designation" class="form-control Designation"
+                                        <input type="text" name="designation" class="form-control Designation"
                                             placeholder="Designation">
                                     </div>
                                 </div>
                                 <div class="form-group bmd-form-group pb-4">
                                     <div class="input-group">
-                                        <input type="text" name="Department" class="form-control Department"
+                                        <input type="text" name="department" class="form-control Department"
                                             placeholder="Department">
                                     </div>
                                 </div>
@@ -608,7 +609,8 @@ session_start();
 
                             <div class="col-sm-12 col-md-4">
                                 <div class="form-group  emp-file-upload">
-                                    <input type="file" name="residential_proof" multiple="" class="inputFileHidden emp-proof-upload">
+                                    <input type="file" accept="image/*" name="residential_proof" multiple="" class="inputFileHidden emp-proof-upload">
+                                    <small class="file-name"></small>
                                     <div class="input-group">
                                         <input type="text" class="form-control inputFileVisible" placeholder="Residential Proof">
                                         <span class="input-group-btn">
@@ -621,7 +623,8 @@ session_start();
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="form-group  emp-file-upload">
-                                    <input type="file" name="qualification_proof" multiple="" class="inputFileHidden emp-proof-upload">
+                                    <input type="file" accept="image/*" name="qualification_proof" multiple="" class="inputFileHidden emp-proof-upload">
+                                    <small class="file-name"></small>
                                     <div class="input-group">
                                         <input type="text" class="form-control inputFileVisible" placeholder="Qualification Proof">
                                         <span class="input-group-btn">
@@ -634,7 +637,8 @@ session_start();
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="form-group emp-file-upload">
-                                    <input type="file" name="certification_proof" multiple="" class=" emp-proof-upload">
+                                    <input type="file" accept="image/*" name="certification_proof" multiple="" class=" emp-proof-upload">
+                                    <small class="file-name"></small>
                                     <div class="input-group">
                                         <input type="text" class="form-control " placeholder="Certification Proof">
                                         <span class="input-group-btn">
@@ -715,20 +719,12 @@ session_start();
                             </div>
 
                             <div class="col-sm-12 col-md-6">
-                                <div class="form-group bmd-form-group pb-4">
-                                    <div class="input-group">
-                                        <input type="text" name="region" class="form-control team-name"
-                                            placeholder="Region">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
                                 <label class="mb-1">Gender</label>
                                 <div class="row">
                                     <div class="col-3">
                                         <div class="form-check mt-0 form-check-radio">
                                             <label class="form-check-label">
-                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="male" checked>
+                                                <input class="form-check-input" type="radio" name="emp_gender" id="exampleRadios1" value="male" checked>
                                                 Male
                                                 <span class="circle">
                                                     <span class="check"></span>
@@ -739,7 +735,7 @@ session_start();
                                     <div class="col-9">
                                         <div class="form-check mt-0 form-check-radio">
                                             <label class="form-check-label">
-                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="female" >
+                                                <input class="form-check-input" type="radio" name="emp_gender" id="exampleRadios2" value="female" >
                                                 Female
                                                 <span class="circle">
                                                     <span class="check"></span>
@@ -753,7 +749,7 @@ session_start();
                                 <div class="form-group bmd-form-group pb-4">
                                     <label>Birth Date</label>
                                     <div class="input-group">
-                                        <input type="date" name="birth_date" class="form-control team-name"
+                                        <input type="date" name="emp_birth_date" class="form-control team-name"
                                             placeholder="Birth Date">
                                     </div>
                                 </div>
@@ -762,7 +758,7 @@ session_start();
                                 <div class="form-group bmd-form-group pb-4">
                                     <label>Hire Date</label>
                                     <div class="input-group">
-                                        <input type="date" name="hire_date" class="form-control team-name"
+                                        <input type="date" name="emp_hire_date" class="form-control team-name"
                                             placeholder="Hire Date">
                                     </div>
                                 </div>
@@ -770,7 +766,7 @@ session_start();
                             <div class="col-6">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="">
+                                        <input class="form-check-input last-job-details-checkbox"  type="checkbox" value="">
                                         Last Job Details
                                         <span class="form-check-sign">
                                             <span class="check" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1"></span>
@@ -782,36 +778,44 @@ session_start();
                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                                     <div class="card card-body">
                                         <h5 class="text-center"><b>You Worked Any Where Before</b></h5>
-                                        <div class="col-12">
-                                            <div class="form-group bmd-form-group pb-4">
-                                                <div class="input-group">
-                                                    <input type="text" name="department" class="form-control team-name"
-                                                        placeholder="Department">
-                                                </div>
-                                            </div>
-                                            <div class="form-group bmd-form-group pb-4">
-                                                <div class="input-group">
-                                                    <input type="text" name="company_name" class="form-control team-name"
-                                                        placeholder="Company Name">
-                                                </div>
-                                            </div>
-                                            <div class="form-group bmd-form-group pb-4">
-                                                <div class="input-group">
-                                                    <input type="text" name="company_address" class="form-control team-name"
-                                                        placeholder="Company Address">
-                                                </div>
-                                            </div>
-                                            <div class="">
-                                                <label>Upload Last 4 Salary Slip</label>
-                                                <div class="form-group form-file-upload form-file-multiple is-focused">
-                                                    <input type="file" multiple="" class="inputFileHidden">
+                                        <div class="row emp-prev-job-details-form">
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group bmd-form-group pb-4">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control inputFileVisible" placeholder="Multiple Files" multiple>
-                                                        <span class="input-group-btn">
-                                                            <button type="button" class="btn btn-fab btn-round btn-info">
-                                                                <i class="material-icons">layers</i>
-                                                            </button>
-                                                        </span>
+                                                        <input type="text" name="prev_company_name" class="form-control prev-company-name"
+                                                            placeholder="Company Name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group bmd-form-group pb-4">
+                                                    <div class="input-group">
+                                                        <input type="text" name="emp_experience" class="form-control experience"
+                                                            placeholder="Experience">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group bmd-form-group pb-4">
+                                                    <div class="input-group">
+                                                        <input type="text" name="prev_salary" class="form-control prev-salary"
+                                                            placeholder="Salary">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="">
+                                                    <div class="form-group form-file-upload form-file-multiple is-focused">
+                                                        <input type="file" accept="image/*" name="prev_salary_sleep" multiple="" class="inputFileHidden upload-salary-sleep">
+                                                        <small class="file-name"></small>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control inputFileVisible" placeholder="Upload Last 4 Salary Slip (Multiple Files)" multiple>
+                                                            <span class="input-group-btn">
+                                                                <button type="button" class="btn btn-fab btn-round btn-info">
+                                                                    <i class="material-icons">layers</i>
+                                                                </button>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

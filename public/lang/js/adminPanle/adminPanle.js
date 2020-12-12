@@ -1,6 +1,4 @@
 
-
-
 let showDarkMode = localStorage.getItem("darkMode");
 var decider = document.getElementById('switch');
 // Dark mode code
@@ -54,6 +52,41 @@ $(document).ready(function () {
             localStorage.setItem("darkMode", false);
         }
     });
+
+    // employee prev job details checkbox
+    $('.last-job-details-checkbox').bind('change', function () {
+        if ($(this).is(':checked')) {
+            $(".emp-prev-job-details-form input").each(function () {
+                $(this).attr("required", "required");
+            });
+        }
+        else {
+            $(".emp-prev-job-details-form input").each(function () {
+                $(this).removeAttr("required");
+            });
+        }
+    });
+
+
+    // employee uplod file validation code
+    $("#add-employee input[type=file]").each(function () {
+        $(this).on("change", function () {
+            var uploaded_file_details = this.files[0];
+            if (uploaded_file_details.size < 3145728) {
+
+                if (uploaded_file_details.type.indexOf("image/") > -1) {
+                    $(this).next(".file-name").text(uploaded_file_details.name).css("color", "green");
+                } else {
+                    $(this).next(".file-name").text("Upload Only Image").css("color", "red");
+                }
+
+            } else {
+                $(this).next(".file-name").text("Upload Only 3Mb file").css("color", "red");
+                // $("<span class='text-success animate__animated animate__bounce'><b>"+uploaded_file_details.name +"</b></span>").insertAfter(this);
+            }
+        })
+    });
+
 
     $("#emp_img_select").change(function () {
         $(".avtar-dumy-img").addClass("img-hide");
@@ -169,7 +202,6 @@ $(document).ready(function () {
             console.log("error !");
             toasterOptions();
         }
-
     });
 
     // ajax to get team for set role
@@ -226,6 +258,32 @@ $(document).ready(function () {
                     toastr.error("Duplicate Role Not Allowed !");
                     toasterOptions();
                 }
+            }
+        });
+    });
+
+
+    // add new employee ajax request
+    $("#add-employee").submit(function (e) {
+        debugger;
+        let data = new FormData(this);
+        //enctype: 'multipart/form-data',
+        console.log(data);
+        console.log("data");
+
+        e.preventDefault();
+        $.ajax({
+
+            type: "POST",
+            url: "api/employee",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                console.log("this.formData");
+                console.log(this.formData);
+                alert(response.response);
             }
         });
     });
@@ -383,7 +441,6 @@ function deleteRole(role_id) {
     });
 }
 
-
 // get team name for select box function
 function getTeamName() {
     const token = $('body').attr('token');
@@ -537,7 +594,7 @@ function getJobroleData(param) {
     });
 
     // set salary
-    $("#select-jobRole").on("change", function(){
+    $("#select-jobRole").on("change", function () {
         var select_index = this.selectedIndex;
         var options = $("#select-jobRole option");
         var salary = $(options[select_index]).attr("salary");
@@ -545,7 +602,6 @@ function getJobroleData(param) {
     });
 
 }
-
 
 // get only job role for show in add employee form select box
 function getAllJobRoleForAddEmpForm() {
@@ -568,14 +624,14 @@ function getAllJobRoleForAddEmpForm() {
 
                 $("#select-jobRole").html('');
                 var defaul_opt = document.createElement("OPTION");
-                    defaul_opt.innerHTML = "Select Job Role";
-                    defaul_opt.salary = "0";
+                defaul_opt.innerHTML = "Select Job Role";
+                defaul_opt.salary = "0";
                 $("#select-jobRole").append(defaul_opt);
 
                 response.response.forEach(data => {
                     var jobRole_name = data.job_role;
                     var opt = document.createElement("OPTION");
-                        $(opt).attr("salary", data.salary);
+                    $(opt).attr("salary", data.salary);
                     opt.innerHTML = jobRole_name;
                     $("#select-jobRole").append(opt);
                 });
@@ -591,5 +647,3 @@ function getAllJobRoleForAddEmpForm() {
     });
 
 }
-
-

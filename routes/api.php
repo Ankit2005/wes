@@ -23,3 +23,5 @@ Route::apiResource('/company','restApi\company');
 Route::apiResource('/team', 'restApi\teamApi');
 
 Route::apiResource('/jobrole','restApi\jobroleApi');
+
+Route::apiResource('/employee', 'restApi\employeeApi');
