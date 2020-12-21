@@ -106,11 +106,10 @@
         @yield('content')
     </div>
 
-
-  <script src="{{url('/')}}/js/core/jquery.min.js"></script>
+    <script src="{{url('/')}}/js/core/jquery.min.js"></script>
   <script src="{{url('/')}}/js/core/popper.min.js"></script>
   <script src="{{url('/')}}/js/core/bootstrap-material-design.min.js"></script>
-  <script src="{{url('/')}}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  {{-- <script src="{{url('/')}}/js/plugins/perfect-scrollbar.jquery.min.js"></script> --}}
   <!-- Plugin for the momentJs  -->
   <script src="{{url('/')}}/js/plugins/moment.min.js"></script>
   <!--  Plugin for Sweet Alert -->

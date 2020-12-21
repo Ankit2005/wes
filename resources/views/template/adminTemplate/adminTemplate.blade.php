@@ -201,6 +201,7 @@
     </div>
 
 
+
   <script src="{{url('/')}}/js/core/jquery.min.js"></script>
   <script src="{{url('/')}}/js/core/popper.min.js"></script>
   <script src="{{url('/')}}/js/core/bootstrap-material-design.min.js"></script>

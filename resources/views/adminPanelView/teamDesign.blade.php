@@ -362,7 +362,69 @@ session_start();
                 </div>
             </div>
 
-            <div class="row">
+
+           {{--- show all employee list ---}}
+            <div>
+                <div id="carouselExampleIndicators" class="carousel slide" data-interval="false" data-ride="carousel">
+                    <div class="d-flex justify-content-between bg-success align-items-center">
+
+                        <div class="px-3">
+                            <h4 class="text-light m-0 px-2">Employees</h4>
+                            <select class="bg-dark custom-select mt-1 text-light find-emp">
+                                <option selected>Seachr By</option>
+                                <option data-type="text" data-hint="Enter Employee Name" value="emp_name">Employee Name</option>
+                                <option data-type="number" data-hint="Enter Employee Id" value="emp_id">Employee Id</option>
+                                <option data-type="number" data-hint="Enter Employee Mobile Num" value="emp_mobile">Employee Mobile</option>
+                                <option data-type="text" data-hint="Enter Employee City Name" value="emp_city_name">City</option>
+                                <option data-type="text" data-hint="Enter Employee Email Id" value="emp_email">Employee Email</option>
+                            </select>
+                        </div>
+
+                        <div class="dFlexGrow mt-4">
+                            <div class="input-group no-border w-100">
+                                <input type="text" value="" class="form-control emp-search-field" disabled placeholder="choose option from search by">
+                                <button type="submit" class="btn bg-transparent border-0 shadow-none btn-round btn-just-icon">
+                                 <i class="material-icons">search</i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="p-2">
+                            <div>
+                                <button class="btn btn-primary btn-sm"  href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="">&larr;</span>
+                                </button>
+                                <button class="btn btn-primary btn-sm" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="">&rarr;</span>
+                                </button>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <select class="bg-dark custom-select mt-1 text-light search-emp-limit">
+                                    <option value="6">6</option>
+                                    <option value="12">12</option>
+                                    <option value="18">18</option>
+                                    <option value="24">24</option>
+                                </select>
+                                <button class="btn btn-info btn-sm">
+                                    <span class="total-emp">0</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="carousel-inner text-center emp-slider-con">
+                        <div class="carousel-item active">
+                            <div class="row emp-show">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row mt-4">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats">
                         <div class="card-header card-header-warning card-header-icon">
@@ -554,7 +616,7 @@ session_start();
                         </div>
                         {{-- loadder desing code END --}}
 
-                    <form id="add-employee" action="api/employee" enctype="multipart/form-data">
+                    <form id="add-employee" method="POST" action="api/employee" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-xs-12 col-sm-3">
@@ -570,7 +632,7 @@ session_start();
                                                 <span class="material-icons"> add_circle_outline </span>
                                             </span>
                                             <span class="fileinput-exists text-primary">Change</span>
-                                            <input type="file" accept="image/*" name="emp_img" id="emp_img_select" name="..." />
+                                            <input type="file" accept="image/*" name="emp_img" id="emp_img_select" required name="..." />
                                             <small class="file-name mx-2"></small>
                                         </span>
                                         {{--  <a href="#pablo" class="btn btn-danger remove-img-btn btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>--}}
@@ -609,10 +671,10 @@ session_start();
 
                             <div class="col-sm-12 col-md-4">
                                 <div class="form-group  emp-file-upload">
-                                    <input type="file" accept="image/*" name="residential_proof" multiple="" class="inputFileHidden emp-proof-upload">
+                                    <input type="file" accept="image/*" name="residential_proof" multiple="" required class="inputFileHidden emp-proof-upload">
                                     <small class="file-name"></small>
                                     <div class="input-group">
-                                        <input type="text" class="form-control inputFileVisible" placeholder="Residential Proof">
+                                        <input type="text" class="form-control inputFileVisible"  placeholder="Residential Proof">
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-fab btn-round btn-primary">
                                                 <i class="material-icons">apartment</i>
@@ -623,7 +685,7 @@ session_start();
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="form-group  emp-file-upload">
-                                    <input type="file" accept="image/*" name="qualification_proof" multiple="" class="inputFileHidden emp-proof-upload">
+                                    <input type="file" accept="image/*" name="qualification_proof" required  class="inputFileHidden emp-proof-upload">
                                     <small class="file-name"></small>
                                     <div class="input-group">
                                         <input type="text" class="form-control inputFileVisible" placeholder="Qualification Proof">
@@ -637,7 +699,7 @@ session_start();
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="form-group emp-file-upload">
-                                    <input type="file" accept="image/*" name="certification_proof" multiple="" class=" emp-proof-upload">
+                                    <input type="file" accept="image/*" name="certification_proof" required class=" emp-proof-upload">
                                     <small class="file-name"></small>
                                     <div class="input-group">
                                         <input type="text" class="form-control " placeholder="Certification Proof">
@@ -763,6 +825,9 @@ session_start();
                                     </div>
                                 </div>
                             </div>
+
+
+                            {{-- !!!!!!!!!!!!!!!! Last Job Details Section !!!!!!!!!!!!!!!!! --}}
                             <div class="col-6">
                                 <div class="form-check">
                                     <label class="form-check-label">
@@ -782,7 +847,7 @@ session_start();
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group bmd-form-group pb-4">
                                                     <div class="input-group">
-                                                        <input type="text" name="prev_company_name" class="form-control prev-company-name"
+                                                          <input type="text" name="prev_company_name" class="form-control prev-company-name"
                                                             placeholder="Company Name">
                                                     </div>
                                                 </div>
@@ -804,18 +869,16 @@ session_start();
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
-                                                <div class="">
-                                                    <div class="form-group form-file-upload form-file-multiple is-focused">
-                                                        <input type="file" accept="image/*" name="prev_salary_sleep" multiple="" class="inputFileHidden upload-salary-sleep">
-                                                        <small class="file-name"></small>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control inputFileVisible" placeholder="Upload Last 4 Salary Slip (Multiple Files)" multiple>
-                                                            <span class="input-group-btn">
-                                                                <button type="button" class="btn btn-fab btn-round btn-info">
-                                                                    <i class="material-icons">layers</i>
-                                                                </button>
-                                                            </span>
-                                                        </div>
+                                                <div class="form-group  emp-file-upload">
+                                                    <input type="file" accept="image/*" name="prev_salary_sleep[]" multiple="multiple" class="inputFileHidden upload-salary-sleep">
+                                                         <small class="file-name"></small>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control inputFileVisible"  placeholder="Upload Las 4 Salary Sleep">
+                                                        <span class="input-group-btn">
+                                                            <button type="button" class="btn btn-fab btn-round btn-info">
+                                                                <i class="material-icons">layers</i>
+                                                            </button>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>

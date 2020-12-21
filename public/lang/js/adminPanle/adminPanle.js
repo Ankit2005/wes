@@ -7,8 +7,8 @@ var decider = document.getElementById('switch');
 if (showDarkMode == "true") {
     $('#switch').prop('checked', true);
     $("body").addClass("dark-mode");
-
 }
+
 else if (showDarkMode == "false") {
     $('#switch').prop('checked', false);
     $("body").removeClass("dark-mode");
@@ -27,6 +27,10 @@ window.onload = function () {
     else if (showModal == "false") {
         $("#createTeamModal").modal("hide");
     }
+
+
+    
+
 }
 
 var token = $('body').attr('token');
@@ -79,10 +83,12 @@ $(document).ready(function () {
                 if (uploaded_file_details.type.indexOf("image/") > -1) {
                     $(this).next(".file-name").text(uploaded_file_details.name).css("color", "green");
                 } else {
+                    $(this).val('');
                     $(this).next(".file-name").text("Upload Only Image").css("color", "red");
                 }
 
             } else {
+                $(this).val('');
                 $(this).next(".file-name").text("Upload Only 3Mb file").css("color", "red");
                 // $("<span class='text-success animate__animated animate__bounce'><b>"+uploaded_file_details.name +"</b></span>").insertAfter(this);
             }
@@ -92,14 +98,50 @@ $(document).ready(function () {
 
     $("#emp_img_select").change(function () {
         $(".avtar-dumy-img").addClass("img-hide");
-        var fileName = $(this).val();
-        var image = new Image();
-        if (fileName != '') {
+        debugger;
+        var img = this.files[0];
+        if (img.type.indexOf("image/") > -1 && img.size < 3145728) {
+            $(".avtar-dumy-img").addClass("hide-img");
+            // var fileName = $(this).val();
+            var image = new Image();
+
             image.onload = function () {
                 $(".avtar-dumy-img").removeClass("show-img");
             }
         } else {
-            $(".avtar-dumy-img").addClass("show-img");
+            $(".fileinput-preview img").attr("src", '');
+            $(".avtar-dumy-img").removeClass("hide-img");
+            $(".avtar-dumy-img").removeClass("img-hide");
+        }
+    });
+
+
+    // upload employee salary sleep file validation
+
+    $(".upload-salary-sleep").on("change", function () {
+        debugger;
+        var emp_all_salary_sleep = this.files;
+        var only_img = false;
+        var all_img_name = "";
+        if (emp_all_salary_sleep.length == 4) {
+            let allImgSize = 0;
+            $.each(emp_all_salary_sleep, function (i, item) {
+                let img_type = item.type;
+                only_img = img_type.indexOf("image/") > -1 ? true : false;
+                allImgSize += item.size;
+                all_img_name += item.name + " ";
+            });
+
+            if (only_img && allImgSize < 12582912) {
+                $(".salary-sleep-input").val();
+            } else {
+                $(this).val(all_img_name);
+                alert('Upload Only Image file And Total Size is Only 12 mb');
+            }
+        }
+        else {
+            $(this).val("");
+            alert("Please upload 4 salary");
         }
     });
 
@@ -276,7 +318,6 @@ $(document).ready(function () {
 
         e.preventDefault();
         $.ajax({
-
             type: "POST",
             url: "api/employee",
             data: data,
@@ -290,6 +331,43 @@ $(document).ready(function () {
             }
         });
     });
+
+
+    // Find Employee By Select Box code
+
+    $(".find-emp").on("change", function () {
+        $(".emp-search-field").val('');
+        if ($(this).val() == "Seachr By") {
+            $(".emp-search-field").attr("disabled", "disabled");
+            $(".emp-search-field").attr("placeholder", "choose option from search by");
+        } else {
+            $(".emp-search-field").removeAttr('disabled');
+            let selectOpt = this.selectedIndex;
+            var option = $("option", this);
+            let currentSelectedOpt = option[selectOpt];
+            let type = $(currentSelectedOpt).attr("data-type");
+            let placeHolder = $(currentSelectedOpt).attr("data-hint");
+            let value = $(currentSelectedOpt).attr("value");
+            console.log("selected value");
+            console.log(type);
+            console.log(placeHolder);
+            console.log(value);
+
+            // set emp-search-field input  dynamic set attributes
+            $(".emp-search-field").attr({
+                'type': type,
+                'placeholder': placeHolder
+            });
+        }
+    });
+
+
+    // search employee by limit
+    $(".search-emp-limit").on("change", function () {
+        let limit = $(this).val();
+        showEmployees(limit);
+    });
+
 
 });
 
@@ -589,6 +667,8 @@ function getJobroleData(param) {
                 });
             });
 
+            // show employee list ajax request
+            showEmployees();
         },
         error: function (ajax) {
             $(".jobrole-table").html("<p class='text-center'>No Data Found</p>");
@@ -649,6 +729,82 @@ function getAllJobRoleForAddEmpForm() {
         }
     });
 
+}
+
+// show all employee
+function showEmployees(limit) {
+    limit = limit == undefined ? 6 : limit;
+    $.ajax({
+        type: "GET",
+        url: "api/employee",
+        data: {
+            fetch_type: 'pagination',
+            limit: limit
+        },
+        success: function (response) {
+            let totalEmp = response.pagination.total;
+            $(".total-emp").html(totalEmp);
+            $(".emp-show").html('');
+            var all_emp_pic = [];
+            response.response.forEach(data => {
+                all_emp_pic.push(data.emp_img);
+                var table_con = `
+                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 col-12">
+                        <div class="card-profile">
+
+                            <!-- Employee pic skeleton loader start --->
+                                <div class=" m-auto rounded-circle shadow-none emp-pic-loader">
+                                    <div class="col-12 p-0">
+                                        <div class="ph-item">
+                                            <div class="p-0">
+                                                <div class="ph-picture rounded-circle"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- Employee pic skeleton loader end --->
+
+                            <div class="card-body p-0 mt-3">
+                                <h6 class="card-title m-0">`+ data.emp_name + `</h6>
+                                <h4 class="card-category text-gray">`+ data.job_role + `</h4>
+
+                                <div class="social-line">
+                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                        <i class="fa fa-phone text-dark" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                        <i class="fa fa-commenting text-info" aria-hidden="true"></i>
+                                    <div class="ripple-container"></div></a>
+                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                        <i class="fa fa-dot-circle-o text-success" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $(".emp-show").append(table_con);
+            });
+
+            // show emp pic lazyloading code
+            // <img class="d-block w-100 rounded-circle" src="`+ data.emp_img + `" rel="nofollow" >
+
+            function lazyLoad(index) {
+                var loader_element = $(".emp-pic-loader");
+                var img = new Image();
+                img.classList = 'd-block w-100 rounded-circle';
+                img.src = all_emp_pic[index];
+                img.onload = function () {
+                    loader_element[index].innerHTML = '';
+                    loader_element[index].append(img);
+                    if (index < all_emp_pic.length) {
+                        lazyLoad(index+1);
+                    }
+                }
+            }
+            lazyLoad(0);
+        }
+    });
 }
 
 
