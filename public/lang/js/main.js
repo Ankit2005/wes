@@ -1,5 +1,54 @@
 
+let showDarkMode = localStorage.getItem("darkMode");
+var decider = document.getElementById('switch');
+// Dark mode code
+if (showDarkMode == "true") {
+    $('#switch').prop('checked', true);
+    $("body").addClass("dark-mode");
+}
+
+else if (showDarkMode == "false") {
+    $('#switch').prop('checked', false);
+    $("body").removeClass("dark-mode");
+}
+
+window.onload = function () {
+
+     // Show Tooltip function
+     $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    showAllTeams('api/team?page=1');
+    $(".team-sleteton-loader").removeClass("d-none");
+
+    //Danamic modal popup for add employee
+    const showModal = localStorage.getItem("showPopup");
+    if (showModal == "true") {
+        getAllJobRoleForAddEmpForm();
+        $("#createTeamModal").modal("show");
+    }
+    else if (showModal == "false") {
+        $("#createTeamModal").modal("hide");
+    }
+}
+
+
 $(document).ready(function() {
+
+    // Dark Mode On Off Swicth code
+    $(".dark-mode").click(function () {
+        var decider = document.getElementById('switch');
+        if (!decider.checked) {
+            $("body").addClass("dark-mode");
+            localStorage.setItem("darkMode", true);
+        } else {
+            $("body").removeClass("dark-mode");
+            localStorage.setItem("darkMode", false);
+        }
+    });
+
+
   $().ready(function() {
     $sidebar = $('.sidebar');
 

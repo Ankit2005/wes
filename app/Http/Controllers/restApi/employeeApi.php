@@ -46,7 +46,6 @@ class employeeApi extends Controller
     );
     public function index(Request $request)
     {
-
         //$this->get_all_data = Employee::orderBy("id", "desc")->paginate(3);
         $this->searchLimit = $request['limit'];
         $this->get_all_data = Employee::paginate($this->searchLimit);
@@ -54,16 +53,11 @@ class employeeApi extends Controller
             if(count($this->get_all_data) != 0){
                 $this->paginationData = $this->get_all_data;
                foreach($this->get_all_data as $this->empData){
-                    // if(count($this->empSalarySleepUrl) == 4){
-                    //     //$this->empSalarySleepUrl = '';
-                    //     unset($this->empSalarySleepUrl);
-                    // }
                     $this->key = $this->empData->emp_img;
                     $this->img_url = generatUrl::url($this->key);
                     $this->empData->emp_img = $this->img_url;
-                    // echo empty(json_decode($this->empData->prev_salary_sleep));
-                    // exit;
-                    if(!empty(json_decode($this->empData->prev_salary_sleep)) == 1 ){
+
+                    if(empty(json_decode($this->empData->prev_salary_sleep)) != 1 ){
                         $this->getAll_salary_sleep = json_decode($this->empData->prev_salary_sleep);
                         foreach($this->getAll_salary_sleep as $this->getAll_salary_sleep){
                             array_push($this->empSalarySleepUrl, generatUrl::url($this->getAll_salary_sleep));
@@ -113,8 +107,7 @@ class employeeApi extends Controller
        }
 
         $this->store_data = $request->all();
-        $this->all_files = $request->file();
-
+       $this->all_files = $request->file();
         if($request->hasFile("prev_salary_sleep")){
             $index = 0;
             foreach($request->file("prev_salary_sleep") as $this->file){
@@ -128,7 +121,10 @@ class employeeApi extends Controller
             }
             unset($this->all_files['prev_salary_sleep']);
         }
-
+        // echo "<pre>";
+        // print_r ($this->all_files);
+        // echo "</pre>";
+        // exit;
         foreach($this->all_files as $this->key => $this->file){
             $this->fileName = strtolower($this->file->getClientOriginalName());
             $this->folderName = $this->id .". ".$this->store_data['emp_name'];
@@ -161,9 +157,37 @@ class employeeApi extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, request $request)
     {
-        //
+        $this->columnName = $request['searchBy'];
+        $this->searchLimit = $request['limit'];
+        $this->get_all_data = Employee::where($this->columnName, 'like', '%'.$id.'%')->paginate($this->searchLimit);
+
+        if($request['fetch_type'] == 'pagination'){
+            if(count($this->get_all_data) != 0){
+                $this->paginationData = $this->get_all_data;
+               foreach($this->get_all_data as $this->empData){
+                    $this->key = $this->empData->emp_img;
+                    $this->img_url = generatUrl::url($this->key);
+                    $this->empData->emp_img = $this->img_url;
+
+                    if(empty(json_decode($this->empData->prev_salary_sleep)) != 1 ){
+                        $this->getAll_salary_sleep = json_decode($this->empData->prev_salary_sleep);
+                        foreach($this->getAll_salary_sleep as $this->getAll_salary_sleep){
+                            array_push($this->empSalarySleepUrl, generatUrl::url($this->getAll_salary_sleep));
+                        }
+                        $this->empData['prev_salary_sleep'] = $this->empSalarySleepUrl;
+                        $this->empSalarySleepUrl = array();
+                    }
+                    array_push($this->allEmpData, $this->empData);
+                }
+                 return response(array("pagination" =>  $this->paginationData),200)->header("Content-Type","application/json");
+            }else{
+                return response(array("response" => "Data Not Found"),404)->header("Content-Type","application/json");
+            }
+        }else{
+            echo "other type";
+        }
     }
 
     /**

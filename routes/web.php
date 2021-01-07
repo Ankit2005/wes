@@ -59,6 +59,14 @@ Route::get('/{query}/{string}', function ($query, $string) {
     }
 });
 
+Route::get('/accounting', function () {
+    return view('template.adminTemplate.accountingTemplate');
+});
+
+Route::get('/newledger', function () {
+    return view('accounting.ledger.newLedger');
+});
+
 // Route::get('/api/company', function () {
 //     return view('congratulations');
 // });
@@ -69,6 +77,14 @@ Route::get('/{query}/{string}', function ($query, $string) {
 Route::get('/admin', function () {
     return view('adminPanelView.teamDesign');
     // return view('template.adminTemplate.adminTemplate');
+});
+
+Route::get('/newLedger', function () {
+    return view('accounting.ledger.newLedger');
+});
+
+Route::get('/stocks', function () {
+    return view('accounting.stocks.stocks');
 });
 
 // Route::get('/teamdesign', function () {

@@ -1,0 +1,24 @@
+.dark-mode {
+
+    filter: invert(100%);
+
+     /* filter: invert(1) hue-rotate(180deg); */
+}
+
+.z-in{
+    z-index: 1 !important;
+}
+
+.bg-grey{
+    background-color: #eee !important;
+}
+
+.topFix{
+    position: fixed;
+    top: 105px;
+    z-index: 1020;
+}
+
+.sidebar{
+    box-shadow: none !important;
+}

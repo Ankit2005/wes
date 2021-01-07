@@ -366,52 +366,58 @@ session_start();
            {{--- show all employee list ---}}
             <div>
                 <div id="carouselExampleIndicators" class="carousel slide" data-interval="false" data-ride="carousel">
-                    <div class="d-flex justify-content-between bg-success align-items-center">
+                    <div class="d-flex justify-content-between emp-details bg-grey align-items-center p-2">
 
-                        <div class="px-3">
-                            <h4 class="text-light m-0 px-2">Employees</h4>
-                            <select class="bg-dark custom-select mt-1 text-light find-emp">
-                                <option selected>Seachr By</option>
-                                <option data-type="text" data-hint="Enter Employee Name" value="emp_name">Employee Name</option>
-                                <option data-type="number" data-hint="Enter Employee Id" value="emp_id">Employee Id</option>
-                                <option data-type="number" data-hint="Enter Employee Mobile Num" value="emp_mobile">Employee Mobile</option>
-                                <option data-type="text" data-hint="Enter Employee City Name" value="emp_city_name">City</option>
-                                <option data-type="text" data-hint="Enter Employee Email Id" value="emp_email">Employee Email</option>
-                            </select>
-                        </div>
-
-                        <div class="dFlexGrow mt-4">
-                            <div class="input-group no-border w-100">
-                                <input type="text" value="" class="form-control emp-search-field" disabled placeholder="choose option from search by">
-                                <button type="submit" class="btn bg-transparent border-0 shadow-none btn-round btn-just-icon">
-                                 <i class="material-icons">search</i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="p-2">
-                            <div>
-                                <button class="btn btn-primary btn-sm"  href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                    <span class="">&larr;</span>
-                                </button>
-                                <button class="btn btn-primary btn-sm" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                    <span class="">&rarr;</span>
-                                </button>
-                            </div>
-
-                            <div class="d-flex align-items-center">
-                                <select class="bg-dark custom-select mt-1 text-light search-emp-limit">
-                                    <option value="6">6</option>
-                                    <option value="12">12</option>
-                                    <option value="18">18</option>
-                                    <option value="24">24</option>
+                            <div class="px-3  emp-det-w-100 ">
+                                <h4 class=" m-0 px-2">Employees</h4>
+                                <select class="custom-select mt-1 emp-searchBy">
+                                    <option selected>Seachr By</option>
+                                    <option data-type="text" data-hint="Enter Employee Name" value="emp_name">Employee Name</option>
+                                    <option data-type="number" data-hint="Enter Employee Id" value="id">Employee Id</option>
+                                    <option data-type="number" data-hint="Enter Employee Mobile Num" value="contact">Employee Mobile</option>
+                                    <option data-type="text" data-hint="Enter Employee City Name" value="city">City</option>
+                                    <option data-type="text" data-hint="Enter Employee Email Id" value="email">Employee Email</option>
                                 </select>
-                                <button class="btn btn-info btn-sm">
-                                    <span class="total-emp">0</span>
-                                </button>
+
+                                <select class="custom-select mt-1 search-emp-limit">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="12">12</option>
+                                </select>
                             </div>
 
-                        </div>
+                            <div class="dFlexGrow mt-4 emp-details3 search-emp-details emp-det-w-100">
+                                <div class="input-group no-border w-100">
+                                    <input type="text" value="" class="form-control emp-search-field text-light emp-search" disabled placeholder="choose option from search by">
+                                    <button type="submit" id="emp_search_btn" class="btn bg-transparent border-0 shadow-none btn-round btn-just-icon">
+                                        <i class="material-icons">search</i>
+                                    </button>
+                                </div>
+                                <div class="togglebutton">
+                                    <label>
+                                        <input id="showImg" class="show-emp-img" type="checkbox" checked>
+                                            <span class="toggle"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="p-2 d-flex  emp-details1 pagination-emp">
+                                <div>
+                                    <button class="btn btn-primary btn-sm" id="emp-prev-btn">
+                                        <span class="">&larr;</span>
+                                    </button>
+                                    <button class="btn btn-primary btn-sm" id="emp-next-btn">
+                                        <span class="">&rarr;</span>
+                                    </button>
+                                </div>
+
+                                <div class="d-flex align-items-center">
+
+
+                                    <span data-toggle="tooltip" title="Total Employees" class="cp badge mx-2 badge-pill badge-light total-emp border border-dark  ">0</span>
+
+                                </div>
+
+                            </div>
                     </div>
                     <div class="carousel-inner text-center emp-slider-con">
                         <div class="carousel-item active">
@@ -552,42 +558,7 @@ session_start();
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="container-fluid">
-            <nav class="float-left">
-                <ul>
-                    <li>
-                        <a href="https://www.creative-tim.com">
-                            Creative Tim
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://creative-tim.com/presentation">
-                            About Us
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://blog.creative-tim.com">
-                            Blog
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.creative-tim.com/license">
-                            Licenses
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="copyright float-right">
-                &copy;
-                <script>
-                    document.write(new Date().getFullYear())
 
-                </script>, made with <i class="material-icons">favorite</i> by
-                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-            </div>
-        </div>
-    </footer>
 
     @endsection
 

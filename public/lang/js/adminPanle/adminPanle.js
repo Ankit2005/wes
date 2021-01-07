@@ -1,18 +1,16 @@
 
+// let showDarkMode = localStorage.getItem("darkMode");
+// var decider = document.getElementById('switch');
+// // Dark mode code
+// if (showDarkMode == "true") {
+//     $('#switch').prop('checked', true);
+//     $("body").addClass("dark-mode");
+// }
 
-
-let showDarkMode = localStorage.getItem("darkMode");
-var decider = document.getElementById('switch');
-// Dark mode code
-if (showDarkMode == "true") {
-    $('#switch').prop('checked', true);
-    $("body").addClass("dark-mode");
-}
-
-else if (showDarkMode == "false") {
-    $('#switch').prop('checked', false);
-    $("body").removeClass("dark-mode");
-}
+// else if (showDarkMode == "false") {
+//     $('#switch').prop('checked', false);
+//     $("body").removeClass("dark-mode");
+// }
 
 window.onload = function () {
     showAllTeams('api/team?page=1');
@@ -28,9 +26,10 @@ window.onload = function () {
         $("#createTeamModal").modal("hide");
     }
 
-
-    
-
+    // Show Tooltip function
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
 }
 
 var token = $('body').attr('token');
@@ -48,16 +47,16 @@ $(document).ready(function () {
     });
 
     // Dark Mode On Off Swicth code
-    $(".toggle").click(function () {
-        var decider = document.getElementById('switch');
-        if (!decider.checked) {
-            $("body").addClass("dark-mode");
-            localStorage.setItem("darkMode", true);
-        } else {
-            $("body").removeClass("dark-mode");
-            localStorage.setItem("darkMode", false);
-        }
-    });
+    // $(".dark-mode").click(function () {
+    //     var decider = document.getElementById('switch');
+    //     if (!decider.checked) {
+    //         $("body").addClass("dark-mode");
+    //         localStorage.setItem("darkMode", true);
+    //     } else {
+    //         $("body").removeClass("dark-mode");
+    //         localStorage.setItem("darkMode", false);
+    //     }
+    // });
 
     // employee prev job details checkbox
     $('.last-job-details-checkbox').bind('change', function () {
@@ -98,7 +97,7 @@ $(document).ready(function () {
 
     $("#emp_img_select").change(function () {
         $(".avtar-dumy-img").addClass("img-hide");
-        debugger;
+
         var img = this.files[0];
         if (img.type.indexOf("image/") > -1 && img.size < 3145728) {
             $(".avtar-dumy-img").addClass("hide-img");
@@ -119,7 +118,7 @@ $(document).ready(function () {
     // upload employee salary sleep file validation
 
     $(".upload-salary-sleep").on("change", function () {
-        debugger;
+
         var emp_all_salary_sleep = this.files;
         var only_img = false;
         var all_img_name = "";
@@ -309,8 +308,8 @@ $(document).ready(function () {
 
 
     // add new employee ajax request
-    $("#add-employeew").submit(function (e) {
-        debugger;
+    $("#add-employeee").submit(function (e) {
+
         let data = new FormData(this);
         //enctype: 'multipart/form-data',
         console.log(data);
@@ -335,7 +334,7 @@ $(document).ready(function () {
 
     // Find Employee By Select Box code
 
-    $(".find-emp").on("change", function () {
+    $(".emp-searchBy").on("change", function () {
         $(".emp-search-field").val('');
         if ($(this).val() == "Seachr By") {
             $(".emp-search-field").attr("disabled", "disabled");
@@ -365,10 +364,45 @@ $(document).ready(function () {
     // search employee by limit
     $(".search-emp-limit").on("change", function () {
         let limit = $(this).val();
-        showEmployees(limit);
+        let url = "api/employee?page=1";
+        let find = $(".emp-searchBy").val();
+        showEmployees(limit, url, find);
     });
 
 
+    // emp next btn pagination code
+    $("#emp-next-btn").on("click", function () {
+        let limit = $(".search-emp-limit").val();
+        let next_page_url = $(this).attr("next-page");
+        let find = $(".emp-searchBy").val();
+        showEmployees(limit, next_page_url, find);
+    });
+
+    // emp prev btn pagination code
+    $("#emp-prev-btn").on("click", function () {
+        let prev_page_url = $(this).attr("prev-page");
+        let limit = $(".search-emp-limit").val();
+        let find = $(".emp-searchBy").val();
+        showEmployees(limit, prev_page_url, find);
+    });
+
+    // search employee ajax code
+    $(".emp-search").on("input", function () {
+        let limit = $(".search-emp-limit").val();
+        let keyWord = $('.emp-search').val();
+        let url = "api/employee/" + keyWord + "?page=1";
+        let find = $(".emp-searchBy").val();
+        showEmployees(limit, url, find);
+    });
+
+    // show and hide employee img to request
+    $("#showImg").on("change", function(){
+        if($("#showImg").is(':checked')) {
+
+        } else {
+
+        }
+    });
 });
 
 function showAllTeams(url) {
@@ -668,7 +702,10 @@ function getJobroleData(param) {
             });
 
             // show employee list ajax request
-            showEmployees();
+            let url = "api/employee?page=1";
+            let find = "";
+            showEmployees(5, url, find);
+
         },
         error: function (ajax) {
             $(".jobrole-table").html("<p class='text-center'>No Data Found</p>");
@@ -732,24 +769,47 @@ function getAllJobRoleForAddEmpForm() {
 }
 
 // show all employee
-function showEmployees(limit) {
-    limit = limit == undefined ? 6 : limit;
+function showEmployees(limit, url, find) {
+    limit = limit == undefined ? 4 : limit;
+
     $.ajax({
         type: "GET",
-        url: "api/employee",
+        url: url,
         data: {
             fetch_type: 'pagination',
-            limit: limit
+            limit: limit,
+            searchBy: find
         },
         success: function (response) {
             let totalEmp = response.pagination.total;
             $(".total-emp").html(totalEmp);
             $(".emp-show").html('');
+            var next_page_url = response.pagination.next_page_url;
+            var prev_page_url = response.pagination.prev_page_url;
+
+            if (next_page_url != null) {
+                $("#emp-next-btn").attr("disabled", false);
+                next_page_url = next_page_url.split("?")[1];
+                $("#emp-next-btn").attr("next-page", "api/employee?" + next_page_url);
+            } else {
+
+                $("#emp-next-btn").attr("disabled", true);
+            }
+
+            if (prev_page_url != null) {
+                $("#emp-prev-btn").attr("disabled", false);
+                prev_page_url = prev_page_url.split("?")[1];
+                $("#emp-prev-btn").attr("prev-page", "api/employee?" + prev_page_url);
+            } else {
+                $("#emp-prev-btn").attr("disabled", true);
+            }
+
+
             var all_emp_pic = [];
-            response.response.forEach(data => {
+            response.pagination.data.forEach(data => {
                 all_emp_pic.push(data.emp_img);
                 var table_con = `
-                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 col-12">
+                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 col-6 ">
                         <div class="card-profile">
 
                             <!-- Employee pic skeleton loader start --->
@@ -768,7 +828,7 @@ function showEmployees(limit) {
                                 <h6 class="card-title m-0">`+ data.emp_name + `</h6>
                                 <h4 class="card-category text-gray">`+ data.job_role + `</h4>
 
-                                <div class="social-line">
+                                <div class="social-line d-flex border-top">
                                     <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
                                         <i class="fa fa-phone text-dark" aria-hidden="true"></i>
                                     </a>
@@ -790,19 +850,28 @@ function showEmployees(limit) {
             // <img class="d-block w-100 rounded-circle" src="`+ data.emp_img + `" rel="nofollow" >
 
             function lazyLoad(index) {
+                //debugger;
                 var loader_element = $(".emp-pic-loader");
                 var img = new Image();
-                img.classList = 'd-block w-100 rounded-circle';
+                img.classList = 'd-block w-75 rounded-circle m-auto emp-img-border animate__animated animate__flipInY';
                 img.src = all_emp_pic[index];
                 img.onload = function () {
                     loader_element[index].innerHTML = '';
                     loader_element[index].append(img);
                     if (index < all_emp_pic.length) {
-                        lazyLoad(index+1);
+                        lazyLoad(index + 1);
                     }
                 }
             }
-            lazyLoad(0);
+            if($("#showImg").is(':checked')) {
+                lazyLoad(0);
+             } else {
+                $(".emp-pic-loader").remove();
+             }
+
+        }, error: function (ajax) {
+            var emp_no_found_error = `<div class='w-100 text-center font-weight-light m-2'>Employee Not Found</div>`;
+            $(".emp-show").html(emp_no_found_error);
         }
     });
 }
