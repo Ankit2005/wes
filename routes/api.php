@@ -25,3 +25,7 @@ Route::apiResource('/team', 'restApi\teamApi');
 Route::apiResource('/jobrole','restApi\jobroleApi');
 
 Route::apiResource('/employee', 'restApi\employeeApi');
+
+Route::apiResource('/physical-stock-group', 'restApi\physicalstockgroupApi');
+
+

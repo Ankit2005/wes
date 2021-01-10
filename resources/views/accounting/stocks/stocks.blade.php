@@ -114,9 +114,8 @@ session_start();
 
                                                                 <div class="form-group quicksand-font">
                                                                     <label>Under Group</label>
-                                                                    <select type="text" name="under_group" class="form-control rounded-0">
-                                                                        <option>Mobile</option>
-                                                                        <option>Computers</option>
+                                                                    <select type="text" name="under_group" class="form-control rounded-0 select-category-list">
+
                                                                     </select>
                                                                 </div>
 
@@ -141,14 +140,37 @@ session_start();
                                                                 </div>
 
                                                                 <div class="form-group quicksand-font">
-                                                                    <label>Product Images</label>
-                                                                    <input type="file" name="product_images[]" class="z-in form-control rounded-0 product-images" accept="image/*" multiple="multiple" required>
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <label>Click And Select Product Images</label>
+                                                                        <span class="material-icons" data-toggle="tooltip" data-placement="top" title="Select Image File">add</span>
+                                                                    </div>
+                                                                    <input type='file' class="z-in product-images" accept="image/*" multiple="multiple" />
+
+                                                                        {{--  <input type="file" name="product_images[]" class="z-in form-control rounded-0 product-images" accept="image/*" multiple="multiple" required> --}}
+
                                                                 </div>
 
                                                                 <div class="form-group quicksand-font product-images-preview">
-                                                                    <div class="row " id="showProductImg">
-
+                                                                    <div class="row" id="showProductImg">
+                                                                        <div class="col-6 p-1">
+                                                                            <img id="proImg1" class="w-100" src="{{url('/img/faces/download.png')}}" data-toggle="tooltip" data-placement="top" title="" alt="Image"/>
+                                                                        </div>
+                                                                        <div class="col-6 p-1">
+                                                                            <img id="proImg2" class="w-100" src="{{url('/img/faces/download.png')}}" alt="Image"/>
+                                                                        </div>
+                                                                        <div class="col-6  p-1">
+                                                                            <img id="proImg3" class="w-100" src="{{url('/img/faces/download.png')}}" alt="Image"/>
+                                                                        </div>
+                                                                        <div class="col-6  p-1">
+                                                                            <img id="proImg4" class="w-100" src="{{url('/img/faces/download.png')}}" alt="Image"/>
+                                                                        </div>
                                                                     </div>
+                                                                    <div class=" d-none only-select-img " role="alert">
+                                                                        <div class="d-flex align-items-center text-danger">
+                                                                            <span class="material-icons">report_off</span>
+                                                                            <b class=" font-weight-bold mx-2"> Only Select Image Files</b>
+                                                                        </div>
+                                                                     </div>
                                                                 </div>
 
                                                                 <div class="form-group quicksand-font mt-4">
@@ -161,14 +183,15 @@ session_start();
                                                         </div>
                                                         <div class="col-md-6 p-0">
                                                             <div class="card-body">
-                                                                <form class="quicksand-font border p-4 shadow-sm">
+                                                                <form class="quicksand-font border p-4 shadow-sm add-physical-product-category-group">
+                                                                    @csrf
                                                                     <div class="form-group">
                                                                         <label>Create Groups</label>
-                                                                        <input type="text" name="groups" class="form-control rounded-0" placeholder="Enter Group Name Ex:- Mobile" required="required">
+                                                                        <input type="text" name="group_name" class="form-control rounded-0" placeholder="Enter Group Name Ex:- Mobile" required="required">
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <select name="under_group" class="form-control rounded-0">
+                                                                        <select name="under_group" class="form-control rounded-0 select-category-list">
                                                                             <option>Primary</option>
                                                                         </select>
                                                                     </div>
@@ -177,6 +200,8 @@ session_start();
                                                                         <button class="btn erpbg-primary text-white rounded-0" type="submit">
                                                                             Add Group
                                                                         </button>
+
+                                                                        <div class="cateory-notfound-alert d-none latter-space text-warning w-100 p-2 font-weight-bold animate__animated animate__flash animate__infinite	infinite animate__slow	3s"><b>Please Create Category</b></div>
                                                                     </div>
 
                                                                 </form>

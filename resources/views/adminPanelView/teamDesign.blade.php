@@ -121,7 +121,6 @@ session_start();
                                                     <div class="ph-col-2 big"></div>
                                                     <div class="ph-col-4"></div>
                                                     <div class="ph-col-8 empty"></div>
-
                                                 </div>
                                                 <div class="ph-row">
                                                     <div class="ph-col-6 big"></div>
@@ -129,7 +128,6 @@ session_start();
                                                     <div class="ph-col-2 big"></div>
                                                     <div class="ph-col-4"></div>
                                                     <div class="ph-col-8 empty"></div>
-
                                                 </div>
                                                 <div class="ph-row">
                                                     <div class="ph-col-6 big"></div>

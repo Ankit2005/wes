@@ -87,6 +87,8 @@ Route::get('/stocks', function () {
     return view('accounting.stocks.stocks');
 });
 
+
+
 // Route::get('/teamdesign', function () {
 //     return view('adminPanelView.teamDesign');
 // });

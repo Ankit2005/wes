@@ -15,9 +15,8 @@ else if (showDarkMode == "false") {
 window.onload = function () {
 
      // Show Tooltip function
-     $(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
+    $('[data-toggle="tooltip"]').tooltip();
+
 
     showAllTeams('api/team?page=1');
     $(".team-sleteton-loader").removeClass("d-none");

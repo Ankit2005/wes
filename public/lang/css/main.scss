@@ -5,6 +5,19 @@
      /* filter: invert(1) hue-rotate(180deg); */
 }
 
+.select2-results__option--highlighted{
+    background-color: #9c27b0 !important;
+}
+
+.latter-space{
+    letter-spacing: 1px;
+}
+
+
+.shadow-none{
+    box-shadow: none !important;
+}
+
 .z-in{
     z-index: 1 !important;
 }

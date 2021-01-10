@@ -26,10 +26,7 @@ window.onload = function () {
         $("#createTeamModal").modal("hide");
     }
 
-    // Show Tooltip function
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    });
+
 }
 
 var token = $('body').attr('token');
@@ -376,6 +373,7 @@ $(document).ready(function () {
         let next_page_url = $(this).attr("next-page");
         let find = $(".emp-searchBy").val();
         showEmployees(limit, next_page_url, find);
+
     });
 
     // emp prev btn pagination code
@@ -387,13 +385,44 @@ $(document).ready(function () {
     });
 
     // search employee ajax code
-    $(".emp-search").on("input", function () {
+    $(".emp-search").on("keyup", function () {
+        searchEmp();
+    });
+
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
+
+    var searchEmp = debounce(function() {
         let limit = $(".search-emp-limit").val();
         let keyWord = $('.emp-search').val();
         let url = "api/employee/" + keyWord + "?page=1";
         let find = $(".emp-searchBy").val();
         showEmployees(limit, url, find);
-    });
+    }, 350);
+
+
+
+
+
+
+
+
+
+
+
+
 
     // show and hide employee img to request
     $("#showImg").on("change", function(){
@@ -877,3 +906,23 @@ function showEmployees(limit, url, find) {
 }
 
 
+// Debouncing in Javascript
+//<input type="text" onkeyup="betterFunction()"/>
+// let counter = 0;
+// const getData = () => {
+//   // calls an API and gets Data
+//   console.log("Fetching Data ..", counter++);
+// }
+
+// const debounce = function (fn, d) {
+//   let timer;
+//   return function () {
+//     let context = this, args = arguments;
+//     clearTimeout(timer);
+//     timer = setTimeout(() => {
+//       getData.apply(context, arguments);
+//     }, d);
+//   }
+// }
+
+//const betterFunction = debounce(getData, 300);
